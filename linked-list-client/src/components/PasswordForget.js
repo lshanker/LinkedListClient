@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+// If you want to do this, use https://www.robinwieruch.de/complete-firebase-authentication-react-tutorial/
+
 class PasswordForget extends Component {
     render() {
       return (

@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import withAuthorization from './withAuthorization'
+
 class Home extends Component {
     render() {
       return (
@@ -9,5 +11,8 @@ class Home extends Component {
       );
     }
   }
+
+//I believe this checks if authUser is null
+const authCondition = (authUser) => !!authUser;
   
-export default Home;
+export default withAuthorization(authCondition)(Home);

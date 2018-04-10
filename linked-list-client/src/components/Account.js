@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import withAuthorization from './withAuthorization';
+
 class Account extends Component {
     render() {
       return (
@@ -10,4 +12,8 @@ class Account extends Component {
     }
   }
   
-export default Account;
+
+const authCondition = (authUser) => !!authUser;
+
+export default withAuthorization(authCondition)(Account);
+
