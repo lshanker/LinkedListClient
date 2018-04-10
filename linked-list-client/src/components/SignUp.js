@@ -4,6 +4,7 @@ import {
   withRouter,
  } from 'react-router-dom';
 
+ import firebase from 'firebase/app'
 import { auth } from '../firebase';
 
 import * as routes from '../constants/routes';
@@ -39,6 +40,8 @@ const SignUp = ({ history }) =>
     //When the sign up form is submitted
     onSubmit = (event) => {
 
+      event.preventDefault();
+
       const {
         username,
         email,
@@ -50,7 +53,7 @@ const SignUp = ({ history }) =>
       } = this.props;
 
   
-      auth.doCreateUserWithEmailAndPassword(email, passwordOne).then(authUser => 
+      firebase.auth().createUserWithEmailAndPassword(email, passwordOne).then(authUser => 
         {
           this.setState(() => ({ ...INITIAL_STATE}));
           history.push(routes.HOME);

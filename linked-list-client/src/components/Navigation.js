@@ -2,16 +2,20 @@ import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 
 import SignOutButton from './SignOut'
+import AuthUserContext from './AuthUserContext';
+
 import * as routes from '../constants/routes';
 
-
-const Navigation = ({ authUser }) =>
-  <div>
-    { authUser
-        ? <NavigationAuth />
-        : <NavigationNonAuth />
+//authUser is passed implicitly through the context
+//when authUser changes in the provider, it will change in the context
+//and change in this component as well
+const Navigation = () =>
+  <AuthUserContext.Consumer>
+    {authUser => authUser
+      ? <NavigationAuth />
+      : <NavigationNonAuth />
     }
-  </div>
+  </AuthUserContext.Consumer>
 
 const NavigationAuth = () =>
   <ul>

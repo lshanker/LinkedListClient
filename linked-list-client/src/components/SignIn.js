@@ -33,17 +33,6 @@ class SignInForm extends Component {
     this.state = { ...INITIAL_STATE };
   }
 
-  componentDidMount(){
-    console.log("HERE");
-    firebase.auth().signInWithEmailAndPassword("lshanker449@gmail.com", "linkedlist123")
-    .then(function(firebaseUser) {
-        // Success 
-    })
-    .catch(function(error) {
-        // Error Handling
-    });
-  }
-
   onSubmit = (event) => {
 
     event.preventDefault();
