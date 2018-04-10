@@ -2,7 +2,11 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 
 import { SignUpLink } from './SignUp';
-import { auth } from '../firebase';
+
+//This doesn't work... not sure why
+import { auth } from '../firebase/index';
+
+import firebase from 'firebase/app'
 import * as routes from '../constants/routes';
 
 const SignIn = ({ history }) =>
@@ -29,7 +33,21 @@ class SignInForm extends Component {
     this.state = { ...INITIAL_STATE };
   }
 
+  componentDidMount(){
+    console.log("HERE");
+    firebase.auth().signInWithEmailAndPassword("lshanker449@gmail.com", "linkedlist123")
+    .then(function(firebaseUser) {
+        // Success 
+    })
+    .catch(function(error) {
+        // Error Handling
+    });
+  }
+
   onSubmit = (event) => {
+
+    event.preventDefault();
+
     const {
       email,
       password,
@@ -39,7 +57,8 @@ class SignInForm extends Component {
       history,
     } = this.props;
 
-    auth.doSignInWithEmailAndPassword(email, password)
+    //Should be auth.doSignInWithEmailAndPassword but doesn't work
+    firebase.auth().signInWithEmailAndPassword(email, password)
       .then(() => {
         this.setState(() => ({ ...INITIAL_STATE }));
         history.push(routes.HOME);
@@ -47,8 +66,7 @@ class SignInForm extends Component {
       .catch(error => {
         this.setState(byPropKey('error', error));
       });
-
-    event.preventDefault();
+    
   }
 
   render() {
