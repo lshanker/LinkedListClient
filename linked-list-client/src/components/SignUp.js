@@ -9,6 +9,7 @@ import { auth } from '../firebase';
 
 import * as routes from '../constants/routes';
 
+import './SignUp.css'
 
 const SignUp = ({ history }) => 
   <div>
@@ -120,10 +121,9 @@ const SignUp = ({ history }) =>
   }
   
   const SignUpLink = () => 
-    <p>
-      No account?
-      <Link to={routes.SIGN_UP}>Sign Up</Link>
-    </p>
+    <div className = "sign-up-link mx-auto">
+      <p> No account? <Link to={routes.SIGN_UP}>Sign Up</Link></p>
+    </div>
   
 
   export default withRouter(SignUp);

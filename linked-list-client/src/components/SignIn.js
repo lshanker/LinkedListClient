@@ -9,11 +9,18 @@ import { auth } from '../firebase/index';
 import firebase from 'firebase/app'
 import * as routes from '../constants/routes';
 
+import './SignIn.css'
+
+
 const SignIn = ({ history }) =>
-  <div>
-    <h1>Sign In</h1>
-    <SignInForm history={history} />
-    <SignUpLink />
+  <div id="sign-in-root">
+    <div className = "card mx-auto">
+      <div className = "cardBody">
+        <SignInForm history={history} />
+        <SignUpLink />
+      </div> 
+    </div>
+    
   </div>
 
 const byPropKey = (propertyName, value) => () => ({
@@ -71,24 +78,41 @@ class SignInForm extends Component {
 
     return (
       <form onSubmit={this.onSubmit}>
-        <input
-          value={email}
-          onChange={event => this.setState(byPropKey('email', event.target.value))}
-          type="text"
-          placeholder="Email Address"
-        />
-        <input
-          value={password}
-          onChange={event => this.setState(byPropKey('password', event.target.value))}
-          type="password"
-          placeholder="Password"
-        />
-        <button  class="btn btn-primary" disabled={isInvalid} type="submit">
+
+        <p className="h4 text-center py-4">Sign In</p>
+
+        <div className = "md-form">
+          <input
+            id="signInEmail"
+            value={email}
+            onChange={event => this.setState(byPropKey('email', event.target.value))}
+            type="text"
+            placeholder="Email"
+            className="form-control"
+          />
+        </div>
+
+        <div className="md-form">
+          <input
+            id="signInPassword"
+            value={password}
+            onChange={event => this.setState(byPropKey('password', event.target.value))}
+            type="password"
+            placeholder="Password"
+            className="form-control"
+          />
+        </div>
+
+        
+        <div className="text-center mt-4">
+          <button  className="btn btn-primary" disabled={isInvalid} type="submit">
           Sign In
-        </button>
+          </button>
+        </div>
 
         { error && <p>{error.message}</p> }
       </form>
+    
     );
   }
 }
