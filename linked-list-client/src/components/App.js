@@ -12,6 +12,7 @@ import Landing from './Landing';
 import SignUp from './SignUp';
 import Home from './Home';
 import Account from './Account';
+import PasswordForget from './PasswordForget';
 
 import * as routes from '../constants/routes';
 
@@ -43,6 +44,10 @@ class App extends Component {
           <Route
             exact path={routes.ACCOUNT}
             component={() => <Account />}
+          />
+          <Route
+            exact path={routes.PASSWORD_FORGET}
+            component={() => <PasswordForget />}
           />
         </div>
       </Router>
