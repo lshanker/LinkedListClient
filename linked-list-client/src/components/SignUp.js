@@ -13,8 +13,11 @@ import './SignUp.css'
 
 const SignUp = ({ history }) => 
   <div>
-    <h1>SignUp</h1>
-    <SignUpForm history={history} />
+    <div className = "card mx-auto">
+     <div className = "cardBody">
+       <SignUpForm history={history} />
+      </div>
+    </div>
   </div>
 
 
@@ -84,37 +87,55 @@ const SignUp = ({ history }) =>
       username === '';
 
       return(
-        <form onSubmit={this.onSubmit}>
-          <input
-            value={username}
-            onChange={event => this.setState(byPropKey('username', event.target.value))}
-            type="text"
-            placeholder="Full Name"
-          />
-          <input
-            value={email}
-            onChange={event => this.setState(byPropKey('email', event.target.value))}
-            type="text"
-            placeholder="Email Address"
-          />
-          <input
-            value={passwordOne}
-            onChange={event => this.setState(byPropKey('passwordOne', event.target.value))}
-            type="password"
-            placeholder="Password"
-          />
-          <input
-            value={passwordTwo}
-            onChange={event => this.setState(byPropKey('passwordTwo', event.target.value))}
-            type="password"
-            placeholder="Confirm Password"
-          />
-          <button disabled={isInvalid} type="submit">
-            Sign Up
-          </button>
+   
+          <form onSubmit={this.onSubmit}>
+            <p className="h4 text-center mb-4">Sign up</p>
+           
+            <div className="md-form">
+              <input
+                value={username}
+                onChange={event => this.setState(byPropKey('username', event.target.value))}
+                type="text"
+                placeholder="Username"
+              />
+            </div>
 
-          { error && <p>{error.message}</p> }
-        </form>
+            <div className="md-form">
+              <input
+                value={email}
+                onChange={event => this.setState(byPropKey('email', event.target.value))}
+                type="text"
+                placeholder="Email Address"
+              />
+            </div>
+
+            <div className="md-form">
+              <input
+                value={passwordOne}
+                onChange={event => this.setState(byPropKey('passwordOne', event.target.value))}
+                type="password"
+                placeholder="Password"
+              />
+            </div>
+
+            <div className="md-form">
+              <input
+                value={passwordTwo}
+                onChange={event => this.setState(byPropKey('passwordTwo', event.target.value))}
+                type="password"
+                placeholder="Confirm Password"
+              />
+            </div>
+            
+            <div>
+            <button disabled={isInvalid} type="submit" className = "btn btn-primary text-center mt-4">
+              Register
+            </button>
+            </div>
+
+            { error && <p id="errorMessage">{error.message}</p> }
+          </form>
+
       );
     }
 

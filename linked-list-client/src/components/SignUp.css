@@ -5,3 +5,22 @@ div.sign-up-link {
 div.sign-up-link p {
     text-align: center;
 }
+
+.card {
+    width: 25%;
+    min-width: 380px;
+    padding: 20px;
+}
+
+form {
+    text-align: center;
+}
+
+input {
+    width: fill;
+}
+
+#errorMessage {
+    color: red;
+    margin-top: 10px;
+}
