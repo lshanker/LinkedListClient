@@ -1,16 +1,46 @@
 import React, { Component } from 'react';
 
 import withAuthorization from './withAuthorization'
+import { db } from '../firebase';
 
 class Home extends Component {
-    render() {
-      return (
-        <div>
-            <h1>Looks like the home page!</h1>
-        </div>
-      );
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      users: null,
     }
   }
+
+  componentDidMount(){
+    db.onceGetUsers().then(snapshot => 
+      this.setState(() => ({ users: snapshot.val() }))
+    );
+  }
+
+  render() {
+    const { users } = this.state;
+
+    return (
+      <div>
+          <h1>Looks like the home page!</h1>
+
+          { !!users && <UserList users={users} /> }
+      </div>
+    );
+  }
+}
+
+
+//An example of parsing the user list
+const UserList = ({ users }) =>
+  <div>
+    <h2>Usernames</h2>
+    {Object.keys(users).map(key =>
+      <div key={key}>{users[key].username}</div>
+    )}
+  </div>
 
 //I believe this checks if authUser is null
 const authCondition = (authUser) => !!authUser;
