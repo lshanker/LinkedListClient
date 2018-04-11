@@ -96,7 +96,7 @@ const SignUp = ({ history }) =>
                 value={username}
                 onChange={event => this.setState(byPropKey('username', event.target.value))}
                 type="text"
-                placeholder="Username"
+                placeholder="Full Name"
               />
             </div>
 
