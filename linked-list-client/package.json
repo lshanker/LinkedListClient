@@ -2,11 +2,16 @@
   "name": "linked-list-client",
   "version": "0.1.0",
   "private": true,
+  "mdbreact": "git+https://github.com/mdbootstrap/React-Bootstrap-with-Material-Design.git",
   "dependencies": {
     "babel": "^6.23.0",
     "babel-plugin-module-alias": "^1.6.0",
+    "bootstrap": "4.0.0",
+    "font-awesome": "4.7.0",
+    "mdbreact": "^4.2.0",
     "react": "^16.3.1",
-    "react-dom": "^16.3.1"
+    "react-dom": "^16.3.1",
+    "react-error-overlay": "4.0.0"
   },
   "devDependencies": {
     "react-scripts": "1.1.4"

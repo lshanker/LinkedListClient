@@ -1,0 +1,11 @@
+
+/*Not working*/
+div.sign-in-root {
+   background: #000000;
+}
+
+.card {
+    width: 25%;
+    min-width: 380px;
+    padding: 20px;
+}

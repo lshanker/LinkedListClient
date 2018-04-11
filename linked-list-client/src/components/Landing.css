@@ -1,0 +1,32 @@
+#landing-root {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    overflow: auto;
+    background: #03A9F4; /* Just to visualize the extent */
+    text-align: cneter;
+}
+
+h1 {
+    font-family: 'Roboto', sans-serif;
+    color: white;
+    font-size: 6em;
+}
+
+#landing-root button{
+    background-color: white;
+    color: black !important;
+}
+
+#landing-root p{
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+    font-size: 1em;
+}
+
+div.button-container {
+    text-align: center;
+}
