@@ -65,7 +65,6 @@ const SignUp = ({ history }) =>
           //Crete a new user object in the firebase db
           db.doCreateUser(authUser.uid, username, email)
           .then(() => {
-            console.log('here')
             this.setState(() => ({ ...INITIAL_STATE}));
             history.push(routes.HOME);
           })

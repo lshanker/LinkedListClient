@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import withAuthorization from './withAuthorization'
 import { db } from '../firebase';
 
+import NavbarFeatures from './NavbarFeatures'
+
 class Home extends Component {
 
   constructor(props) {
@@ -24,6 +26,7 @@ class Home extends Component {
 
     return (
       <div>
+          <NavbarFeatures />
           <h1>Looks like the home page!</h1>
 
           { !!users && <UserList users={users} /> }
