@@ -19,8 +19,46 @@ import PasswordForget from './PasswordForget';
 import * as routes from '../constants/routes';
 
 import withAuthentication from './withAuthentication';
+import { initializeApp } from 'firebase/app';
 
-const App = () =>
+
+const byPropKey = (propertyName, value) => () => ({
+  [propertyName]: value,
+});
+
+const INITIAL_STATE = {
+  userModel: null,
+};
+
+
+const myHome = (props) => {
+  return (
+    <Home
+      {...props}
+    />
+  );
+}
+
+
+class App extends Component {
+
+
+  constructor(){
+    super();
+    this.state = { ...INITIAL_STATE};
+  }
+
+  componentWillMount() {
+    firebase.auth.onAuthStateChanged(authUser => {
+      if(authUser){
+        this.setState(byPropKey('userModel', authUser));
+      }
+    });
+  }
+
+
+  render(){
+    return(
     <Router>
       <div>
     
@@ -38,7 +76,11 @@ const App = () =>
         />
         <Route
           exact path={routes.HOME}
-          component={() => <Home />}
+          render={
+            () => (
+              <Home userModel = {this.state.userModel}/>
+            )
+          }
         />
         <Route
           exact path={routes.ACCOUNT}
@@ -52,5 +94,9 @@ const App = () =>
       </div>
        
     </Router>
+    );
+  }
+
+}
 
 export default withAuthentication (App);

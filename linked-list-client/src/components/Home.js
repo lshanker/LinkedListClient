@@ -4,6 +4,7 @@ import withAuthorization from './withAuthorization'
 import { db } from '../firebase';
 
 import NavbarFeatures from './NavbarFeatures'
+import NewListForm from './NewListForm';
 
 class Home extends Component {
 
@@ -28,7 +29,7 @@ class Home extends Component {
       <div>
           <NavbarFeatures />
           <h1>Looks like the home page!</h1>
-
+          <NewListForm userModel = {this.props.userModel} />
           { !!users && <UserList users={users} /> }
       </div>
     );
@@ -48,4 +49,4 @@ const UserList = ({ users }) =>
 //I believe this checks if authUser is null
 const authCondition = (authUser) => !!authUser;
   
-export default withAuthorization(authCondition)(Home);
+export default Home;
