@@ -15,6 +15,7 @@ import Home from './Home';
 import Account from './Account';
 import PasswordForget from './PasswordForget';
 
+
 import * as routes from '../constants/routes';
 
 import withAuthentication from './withAuthentication';
@@ -22,10 +23,7 @@ import withAuthentication from './withAuthentication';
 const App = () =>
     <Router>
       <div>
-        <Navigation/>
-
-        <hr/>
-
+    
         <Route
           exact path={routes.LANDING}
           component={() => <Landing />}
@@ -50,7 +48,9 @@ const App = () =>
           exact path={routes.PASSWORD_FORGET}
           component={() => <PasswordForget />}
         />
+        
       </div>
+       
     </Router>
 
 export default withAuthentication (App);

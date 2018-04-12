@@ -4,8 +4,8 @@ import {
   withRouter,
  } from 'react-router-dom';
 
- import firebase from 'firebase/app'
-import { auth } from '../firebase';
+import firebase from 'firebase/app'
+import { auth, db } from '../firebase';
 
 import * as routes from '../constants/routes';
 
@@ -56,11 +56,24 @@ const SignUp = ({ history }) =>
         history,
       } = this.props;
 
-  
-      firebase.auth().createUserWithEmailAndPassword(email, passwordOne).then(authUser => 
+
+      firebase.auth().createUserWithEmailAndPassword(email, passwordOne)
+      .then(authUser => 
         {
-          this.setState(() => ({ ...INITIAL_STATE}));
-          history.push(routes.HOME);
+
+          console.log(authUser.uid);
+          //Crete a new user object in the firebase db
+          db.doCreateUser(authUser.uid, username, email)
+          .then(() => {
+            this.setState(() => ({ ...INITIAL_STATE}));
+            history.push(routes.HOME);
+          })
+          .catch(error => {
+            console.log(error.message);
+            this.setState(byPropKey('error', error));
+          });
+
+          
         })
         .catch(error => {
           console.log("Sign up error: " + error.message);
