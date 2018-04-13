@@ -7,6 +7,8 @@ import NavbarFeatures from './NavbarFeatures'
 import NewListForm from './NewListForm';
 import SideList from './SideList';
 
+import './Home.css';
+
 class Home extends Component {
 
   constructor(props) {
@@ -32,9 +34,9 @@ class Home extends Component {
     const { users } = this.state;
 
     return (
-      <div>
+      <div id="home-root">
           <NavbarFeatures />
-          <div className="row">
+          <div className="row" id="home-row">
             <div className="col-2">
               <SideList />
             </div>
