@@ -13,6 +13,7 @@ class Home extends Component {
 
     this.state = {
       users: null,
+      newListFormVisible: false,
     }
   }
 
@@ -22,6 +23,10 @@ class Home extends Component {
     );
   }
 
+  toggleNewListForm = () => {
+    this.setState({newListFormVisible: !this.state.newListFormVisible})
+  }
+
   render() {
     const { users } = this.state;
 
@@ -29,8 +34,10 @@ class Home extends Component {
       <div>
           <NavbarFeatures />
           <h1>Looks like the home page!</h1>
-          <NewListForm userModel = {this.props.userModel} />
+          {/*Only display the new list form on button click*/}
+          {this.state.newListFormVisible && <NewListForm userModel = {this.props.userModel} toggleForm = {this.toggleNewListForm.bind(this)} /> }
           { !!users && <UserList users={users} /> }
+          <button onClick = {() => this.toggleNewListForm()}>Toggle Form</button>
       </div>
     );
   }

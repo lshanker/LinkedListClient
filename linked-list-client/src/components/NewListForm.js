@@ -58,7 +58,6 @@ class NewListForm extends Component {
     
     render(){
         
-
     
         const {
             listName,
@@ -67,35 +66,33 @@ class NewListForm extends Component {
         } = this.state;
 
         return(
-                <form onSubmit={this.onSubmit}>
-                    <input
-                        type="text" 
-                        placeholder="List Name"
-                        value = {listName}
-                        onChange={event => this.setState(byPropKey('listName', event.target.value))}
-                    />
-                    <input 
-                        type="text"
-                        placeholder="List Tag"
-                        value = {listID}
-                        onChange={event => this.setState(byPropKey('listID', event.target.value))}
-                    />
+        <div id="new-list-form-root">
+            <div className="overlay"/>
+            <div className = "card mx-auto">
+                <div className = "cardBody">
+                    <form onSubmit={this.onSubmit}>
+                        <input
+                            type="text" 
+                            placeholder="List Name"
+                            value = {listName}
+                            onChange={event => this.setState(byPropKey('listName', event.target.value))}
+                        />
+                        <input 
+                            type="text"
+                            placeholder="List Tag"
+                            value = {listID}
+                            onChange={event => this.setState(byPropKey('listID', event.target.value))}
+                        />
 
-                     
+                        { error && <p id="errorMessage">{error.message}</p> }
+                    
+                        <button type="submit">Create List</button>
+                    </form>
 
-{/*
-                    <AuthUserContext.Consumer>
-                        {authUser => <input 
-                                        value = {authUser}
-                                      />
-                        }
-                    </AuthUserContext.Consumer>
-                    */}
-
-                    { error && <p id="errorMessage">{error.message}</p> }
-                 
-                    <button type="submit">Create List</button>
-                </form>
+                    <button onClick={() => this.props.toggleForm()}>Cancel</button>
+                </div>
+            </div>
+        </div>
         );
     }
 }
