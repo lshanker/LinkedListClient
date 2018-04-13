@@ -35,7 +35,7 @@ class Home extends Component {
           <NavbarFeatures />
           <h1>Looks like the home page!</h1>
           {/*Only display the new list form on button click*/}
-          {this.state.newListFormVisible && <NewListForm userModel = {this.props.userModel} toggleForm = {this.toggleNewListForm.bind(this)} /> }
+          {this.state.newListFormVisible && <NewListForm userModel = {this.props.userModel} isOpen = {this.state.newListFormVisible} toggle = {this.toggleNewListForm.bind(this)} /> }
           { !!users && <UserList users={users} /> }
           <button onClick = {() => this.toggleNewListForm()}>Toggle Form</button>
       </div>

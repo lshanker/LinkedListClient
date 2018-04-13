@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
+import { Button, Modal, ModalBody, ModalHeader, ModalFooter } from 'mdbreact';
+
 import PropTypes from 'prop-types';
 
 import { auth, db } from '../firebase';
+
 
 import './NewListForm.css';
 import AuthUserContext from './AuthUserContext';
@@ -40,11 +43,14 @@ class NewListForm extends Component {
             .then(() => {
                 console.log("Created list " + listName);
                 this.setState({...INITIAL_STATE});
+                this.props.toggle();
             })
             .catch(error => {
                 console.log("Create list error: " + error.message);
                 this.setState(byPropKey('error', error));
             });
+
+
 
         /*db.doCreateList(listID, listName, this.props.userModel.uid)
             .then(() => {
@@ -67,32 +73,53 @@ class NewListForm extends Component {
 
         return(
         <div id="new-list-form-root">
+            <Modal isOpen={this.props.isOpen} toggle={this.props.toggleForm}>
+               <ModalHeader toggle={this.props.toggle}>New Mailing List</ModalHeader>
+                 <ModalBody>
+                 <form onSubmit={this.onSubmit} id="newListForm">
+                       
+                      <div className = "md-form"> 
+                            <input
+                                type="text" 
+                                placeholder="List Name"
+                                value = {listName}
+                                onChange={event => this.setState(byPropKey('listName', event.target.value))}
+                            />
+                        </div>
+                        <div className = "md-form">
+                            <input 
+                                type="text"
+                                placeholder="List Tag"
+                                value = {listID}
+                                onChange={event => this.setState(byPropKey('listID', event.target.value))}
+                            />
+                        </div>
+
+                        { error && <p id="errorMessage">{error.message}</p> }
+                    </form>
+                </ModalBody>
+                <ModalFooter>
+                    <Button color="secondary" onClick={() => this.props.toggle()}>Close</Button>{' '}
+                    <Button color="primary" type="submit" form="newListForm">Save changes</Button>
+                </ModalFooter>
+            </Modal>
+        
+                
+        {/*
             <div className="overlay"/>
             <div className = "card mx-auto">
                 <div className = "cardBody">
-                    <form onSubmit={this.onSubmit}>
-                        <input
-                            type="text" 
-                            placeholder="List Name"
-                            value = {listName}
-                            onChange={event => this.setState(byPropKey('listName', event.target.value))}
-                        />
-                        <input 
-                            type="text"
-                            placeholder="List Tag"
-                            value = {listID}
-                            onChange={event => this.setState(byPropKey('listID', event.target.value))}
-                        />
-
-                        { error && <p id="errorMessage">{error.message}</p> }
                     
-                        <button type="submit">Create List</button>
-                    </form>
 
                     <button onClick={() => this.props.toggleForm()}>Cancel</button>
                 </div>
             </div>
+        */}
         </div>
+        
+    
+
+    
         );
     }
 }

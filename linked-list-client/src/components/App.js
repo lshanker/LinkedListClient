@@ -89,7 +89,6 @@ class App extends Component {
           exact path={routes.PASSWORD_FORGET}
           component={() => <PasswordForget />}
         />
-        
       </div>
        
     </Router>
