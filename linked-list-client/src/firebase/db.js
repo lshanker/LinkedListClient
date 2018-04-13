@@ -10,6 +10,19 @@ export const doCreateUser = (id, username, email) =>
       console.log('here')
   });
 
+export const doCreateList = (listID, name, uid, email) => 
+  db.ref(`lists/${listID}`).set({
+    name,
+  }).then(()=>{
+    doAddListMember(listID, uid, email);
+  });
+
+export const doAddListMember = (listID, uid, email) =>
+  db.ref(`lists/${listID}/members`).set({
+    [uid]: email,
+  })
+
+
 //returns all users
 export const onceGetUsers = () =>
   db.ref('users').once('value');

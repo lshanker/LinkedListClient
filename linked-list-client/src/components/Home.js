@@ -4,6 +4,7 @@ import withAuthorization from './withAuthorization'
 import { db } from '../firebase';
 
 import NavbarFeatures from './NavbarFeatures'
+import NewListForm from './NewListForm';
 
 class Home extends Component {
 
@@ -12,6 +13,7 @@ class Home extends Component {
 
     this.state = {
       users: null,
+      newListFormVisible: false,
     }
   }
 
@@ -21,6 +23,10 @@ class Home extends Component {
     );
   }
 
+  toggleNewListForm = () => {
+    this.setState({newListFormVisible: !this.state.newListFormVisible})
+  }
+
   render() {
     const { users } = this.state;
 
@@ -28,8 +34,10 @@ class Home extends Component {
       <div>
           <NavbarFeatures />
           <h1>Looks like the home page!</h1>
-
+          {/*Only display the new list form on button click*/}
+          {this.state.newListFormVisible && <NewListForm userModel = {this.props.userModel} isOpen = {this.state.newListFormVisible} toggle = {this.toggleNewListForm.bind(this)} /> }
           { !!users && <UserList users={users} /> }
+          <button onClick = {() => this.toggleNewListForm()}>Toggle Form</button>
       </div>
     );
   }
