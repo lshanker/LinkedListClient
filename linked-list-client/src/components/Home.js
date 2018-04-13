@@ -5,6 +5,7 @@ import { db } from '../firebase';
 
 import NavbarFeatures from './NavbarFeatures'
 import NewListForm from './NewListForm';
+import SideList from './SideList';
 
 class Home extends Component {
 
@@ -33,12 +34,20 @@ class Home extends Component {
     return (
       <div>
           <NavbarFeatures />
-          <h1>Looks like the home page!</h1>
-          {/*Only display the new list form on button click*/}
-          {this.state.newListFormVisible && <NewListForm userModel = {this.props.userModel} isOpen = {this.state.newListFormVisible} toggle = {this.toggleNewListForm.bind(this)} /> }
-          { !!users && <UserList users={users} /> }
-          <button onClick = {() => this.toggleNewListForm()}>Toggle Form</button>
+          <div className="row">
+            <div className="col-2">
+              <SideList />
+            </div>
+            <div className="col-10">
+              <h1>Looks like the home page!</h1>
+              {/*Only display the new list form on button click*/}
+              {this.state.newListFormVisible && <NewListForm userModel = {this.props.userModel} isOpen = {this.state.newListFormVisible} toggle = {this.toggleNewListForm.bind(this)} /> }
+              { !!users && <UserList users={users} /> }
+              <button onClick = {() => this.toggleNewListForm()}>Toggle Form</button>
+            </div>
+          <div/>
       </div>
+    </div>
     );
   }
 }
