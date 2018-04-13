@@ -42,7 +42,6 @@ const myHome = (props) => {
 
 class App extends Component {
 
-
   constructor(){
     super();
     this.state = { ...INITIAL_STATE};

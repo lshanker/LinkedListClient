@@ -49,4 +49,4 @@ const UserList = ({ users }) =>
 //I believe this checks if authUser is null
 const authCondition = (authUser) => !!authUser;
   
-export default Home;
+export default withAuthorization(authCondition)(Home);
