@@ -59,7 +59,7 @@ class App extends Component {
   render(){
     return(
     <Router>
-      <div>
+      <div data-reactroot>
     
         <Route
           exact path={routes.LANDING}
