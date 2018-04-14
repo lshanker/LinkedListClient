@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import withAuthorization from './withAuthorization'
-import { db } from '../firebase';
+  import { db } from '../firebase';
 
 import NavbarFeatures from './NavbarFeatures'
 import NewListForm from './NewListForm';
@@ -38,7 +38,7 @@ class Home extends Component {
           <NavbarFeatures />
           <div className="row" id="home-row">
             <div className="col-2">
-              <SideList />
+              <SideList uid={this.props.userModel.uid}/>
             </div>
             <div className="col-10">
               <h1>Looks like the home page!</h1>

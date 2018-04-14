@@ -1,6 +1,7 @@
 import { db } from './firebase';
 
-/*Functions for writing to the database*/
+
+/*****Functions for writing to the database******/
 
 export const doCreateUser = (id, username, email) =>
   db.ref(`users/${id}`).set({
@@ -36,13 +37,20 @@ export const doAddListMember = (listID, uid, email) => {
 }
 
 
-
-/*Functions for reading from the database*/
+/******Functions for reading from the database******/
 
 //returns all users
 export const onceGetUsers = () =>
   db.ref('users').once('value');
 
 
+//Get all of a user's lists
+export const onceGetLists = (uid) =>
+  db.ref(`users/${uid}/lists`).once('value');
+
+export const continuousGetList = (uid, func) =>
+  db.ref(`users/${uid}/lists`).on('value', function(snapshot){
+    func(snapshot)
+  });
 
 // Other Entity APIs ...
