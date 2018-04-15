@@ -6,6 +6,7 @@ import withAuthorization from './withAuthorization'
 import NavbarFeatures from './NavbarFeatures'
 import NewListForm from './NewListForm';
 import SideList from './SideList';
+import EmailForm from './EmailForm';
 
 import './Home.css';
 
@@ -46,6 +47,8 @@ class Home extends Component {
               {this.state.newListFormVisible && <NewListForm userModel = {this.props.userModel} isOpen = {this.state.newListFormVisible} toggle = {this.toggleNewListForm.bind(this)} /> }
               { !!users && <UserList users={users} /> }
               <button onClick = {() => this.toggleNewListForm()}>Toggle Form</button>
+              <EmailForm />
+            }
             </div>
           <div/>
       </div>

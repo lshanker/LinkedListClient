@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 
+import * as routes from '../constants/routes';
+
+
 const INITIAL_STATE = {
     subject: '',
     message: '',
@@ -7,7 +10,7 @@ const INITIAL_STATE = {
   };
 
 
-class emailForm extends Component{
+class EmailForm extends Component{
 
     constructor(props){
         super(props);
@@ -18,16 +21,16 @@ class emailForm extends Component{
         
             <form onSubmit={this.onSubmit}>
                 <p className="h5 text-center mb-4">Write to us</p>
-                <Input label="Your name" icon="user" group type="email" validate error="wrong" success="right"/>
-                <Input label="Your email" icon="envelope" group type="email" validate error="wrong" success="right"/>
-                <Input label="Subject" icon="tag" group type="email" validate error="wrong" success="right"/>
-                <Input type="textarea" label="Your message" icon="pencil"/>
+                <input placeholder="Subject" icon="tag" group type="email" validate error="wrong" success="right"/>
+                <input placeholder="Enter your message here" label="Your message" icon="pencil"/>
                 <div className="text-center">
-                    <Button color="deep-orange" color="unique">Send <Fa icon="paper-plane-o" className="ml-1"/></Button>
+                    <button color="deep-orange" color="unique">Send <fa icon="paper-plane-o" className="ml-1"/></button>
                 </div>
             </form>
-
+                // <h1>Please work</h1>
         )
     }   
 
 }
+
+export default EmailForm;
