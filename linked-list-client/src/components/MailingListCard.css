@@ -1,0 +1,22 @@
+#mailingListCard-root {
+    padding: 10px;
+    border-bottom: solid lightgray 1px;
+    margin-top: 0px;
+}
+
+#mailingListCard-root h1{
+    font-size: 1.2em;
+    margin-bottom: 0px;
+    word-wrap: break-word;
+}
+
+#mailingListCard-root p{
+    font-size: 0.9em;
+    margin: 0px;
+    color: gray;
+}
+
+
+#mailingListCard-root:hover {
+    background-color: #e8f7ff;
+}
