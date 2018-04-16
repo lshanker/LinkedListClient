@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import firebase from 'firebase/app'
+import { auth, db } from '../firebase';
 
 import * as routes from '../constants/routes';
 

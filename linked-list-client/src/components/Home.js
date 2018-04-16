@@ -48,7 +48,6 @@ class Home extends Component {
               { !!users && <UserList users={users} /> }
               <button onClick = {() => this.toggleNewListForm()}>Toggle Form</button> */}
               <EmailForm />
-            }
             </div>
           <div/>
       </div>
