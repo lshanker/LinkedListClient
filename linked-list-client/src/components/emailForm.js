@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 import firebase from 'firebase/app'
+import axios from 'axios'
+
+import * as urls from '../constants/urls'
+
 import { auth, db } from '../firebase';
 
 
@@ -32,6 +36,20 @@ class EmailForm extends Component{
         
         console.log(subject + message);
         db.doStoreEmail(subject, message, this.props.currentListId, this.props.email);
+    
+        axios.get(urls.SERVER + "mail", {
+            params: {
+                "list": this.props.currentListId,
+                "message": message,
+                "subj": subject
+            }
+        })
+        .then(function (response) {
+            console.log(response);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
     }
 
     render(){

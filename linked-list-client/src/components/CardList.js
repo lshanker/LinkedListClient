@@ -13,8 +13,8 @@ class CardList extends Component {
               {Object.keys(this.props.mailingListCards).map(key =>
                 <MailingListCard 
                     key={key}
-                    name = {key}
-                    tag = {this.props.mailingListCards[key]}
+                    tag = {key}
+                    name = {this.props.mailingListCards[key]}
                     setCurrentList = {this.props.setCurrentList}
                     />
                 )}
