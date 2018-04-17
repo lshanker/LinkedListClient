@@ -1,11 +1,11 @@
 import { db } from './firebase';
-
+import * as urls from '../constants/urls'
 
 /*****Functions for writing to the database******/
 
 function httpGet(queryString, callback)
 {
-    var theUrl = "10.186.97.108:5000/" + queryString;  
+    var theUrl = urls.SERVER + queryString;  
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.onreadystatechange = function() { 
         if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
@@ -20,7 +20,7 @@ function subscribe(list, email, callback){
   return retVal;
 }
 
-function email(list, msg, subj,callback){
+function email(list, msg, subj, callback){
   //list=anotherlist&message=hi&subj=test
   var retVal = httpGet("email?list=" + list + "&message=" + msg + "&subj=" + subj, callback);
   return retVal;

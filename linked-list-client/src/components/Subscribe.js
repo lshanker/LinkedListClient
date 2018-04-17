@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import { db } from '../firebase';
 
-import withAuthorization from './withAuthorization'
+import { withRouter } from 'react-router-dom';
 
 const queryString = require('query-string');
 
@@ -23,6 +24,9 @@ class Subscribe extends Component {
       const parsedQuery = queryString.parse(this.props.location.search);
       const listId = parsedQuery.listId;
 
+      db.Subscribe(listId, this.state.email, () => {
+        console.log('Successfully subscribed');
+      });
       console.log(listId);
     }
 
@@ -63,4 +67,4 @@ class Subscribe extends Component {
 
 const authCondition = (authUser) => !!authUser;
   
-export default withAuthorization(authCondition)(Subscribe);
+export default withRouter(Subscribe);
