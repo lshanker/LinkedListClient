@@ -56,14 +56,17 @@ class Home extends Component {
             <div className="col-1"></div>
             <div className="col-6">
 
-            <button type="button" class="btn btn-elegant" onClick = {() => {this.toggleSharePopup()}}><i class="fa fa-share-square" aria-hidden="true"></i> Share List</button>
+            
             {this.state.newListFormVisible && <NewListForm userModel = {this.props.userModel} isOpen = {this.state.newListFormVisible} toggle =  {this.toggleNewListForm.bind(this)}/>}
             {this.state.sharePopupVisible && <SharePopup currentListId = {this.state.currentListId} isOpen = {this.state.sharePopupVisible} toggle =  {this.toggleSharePopup.bind(this)}/>}
 
               {/* {this.state.currentListId && <EmailForm email = {this.props.userModel.email} currentListId = {this.state.currentListId}/>} */}
               {/* {var ? ifTrue : ifFalse} */}
               {this.state.currentListId ? 
-               <EmailForm email = {this.props.userModel.email} currentListId = {this.state.currentListId}/> 
+              <div>
+                <EmailForm email = {this.props.userModel.email} currentListId = {this.state.currentListId}/> 
+                <button type="button" class="btn btn-outline-elegant mx-auto" onClick = {() => {this.toggleSharePopup()}}><i class="fa fa-share-square" aria-hidden="true"></i> Share List</button>
+               </div>
                : <h1><u><i>Select a list</i></u></h1>}              
 
               <button onClick={() => this.toggleNewListForm()}>toggle form</button>
