@@ -10,11 +10,6 @@ import EmailForm from './EmailForm';
 
 import './Home.css';
 
-const sidebarProps = {
-  bar: (<div>Amazing Sidebar</div>),
-  size: 200
-};
-
 class Home extends Component {
 
   constructor(props) {
@@ -37,9 +32,9 @@ class Home extends Component {
     );
   }
 
-  toggleNewListForm = () => {
-    this.setState({newListFormVisible: !this.state.newListFormVisible})
-  }
+  // toggleNewListForm = () => {
+  //   this.setState({newListFormVisible: !this.state.newListFormVisible})
+  // }
 
   renderListSelectMessage(){
     return(
@@ -64,8 +59,8 @@ class Home extends Component {
                : <h1><u><i>Select a list</i></u></h1>}    
 
                 
-               {this.state.newListFormVisible && <NewListForm userModel = {this.props.userModel} isOpen = {this.state.newListFormVisible} toggle =  {this.toggleNewListForm.bind(this)}/>}          
-              <button onClick={() => this.toggleNewListForm()}>toggle form</button>
+               {/* {this.state.newListFormVisible && <NewListForm userModel = {this.props.userModel} isOpen = {this.state.newListFormVisible} toggle =  {this.toggleNewListForm.bind(this)}/>}          
+              <button onClick={() => this.toggleNewListForm()}>toggle form</button> */}
             </div>
           <div/>
       </div>
