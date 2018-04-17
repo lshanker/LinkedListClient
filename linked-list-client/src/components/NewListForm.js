@@ -84,7 +84,9 @@ class NewListForm extends Component {
                                 onChange={event => this.setState(byPropKey('listID', event.target.value))}
                             />
                         </div>
-
+                        <div className = "md-form">
+                        <input type="checkbox" id="checkbox1" />Gimme your money
+                        </div>
                         { error && <p id="errorMessage">{error.message}</p> }
                     </form>
                 </ModalBody>
