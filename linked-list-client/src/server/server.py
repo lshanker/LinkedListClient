@@ -72,8 +72,26 @@ def add():
     for i in res.each():
         if(i.val() == email):
             count = count + 1
-    # print(count)
-    if(count == 0):
+
+
+    name = db.child("lists").child(mailList).child("name").get()
+    name = name.val()
+    resf = db.child("users").get()
+    vals = resf.val()
+    #print(vals)
+    #x = list(vals[mailList]['members'].items())
+    rem = ""
+    shit = list()
+    for i in vals:
+        shit.append(i)
+    for i in range(len(vals)):
+        print(vals[shit[i]]['email'])
+        if(vals[shit[i]]['email'] == email):
+            rem = shit[i]
+            break
+   
+    if(count == 0 and rem != ""):
+        db.child("users").child(rem).child("lists").push(mailList)
         db.child("lists").child(mailList).child("members").push(email)
 
     
