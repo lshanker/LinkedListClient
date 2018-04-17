@@ -3,6 +3,30 @@ import { db } from './firebase';
 
 /*****Functions for writing to the database******/
 
+function httpGet(queryString, callback)
+{
+    var theUrl = "10.186.97.108:5000/" + queryString;  
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.onreadystatechange = function() { 
+        if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+            callback(xmlHttp.responseText);
+    }
+    xmlHttp.open("GET", theUrl, true); // true for asynchronous 
+    xmlHttp.send(null);
+}
+
+function subscribe(list, email, callback){
+  var retVal = httpGet("sub?list=" + list + "&email=" + email, callback);
+  return retVal;
+}
+
+function email(list, msg, subj,callback){
+  //list=anotherlist&message=hi&subj=test
+  var retVal = httpGet("email?list=" + list + "&message=" + msg + "&subj=" + subj, callback);
+  return retVal;
+}
+
+
 export const doCreateUser = (id, username, email) =>
   db.ref(`users/${id}`).set({
     username,
