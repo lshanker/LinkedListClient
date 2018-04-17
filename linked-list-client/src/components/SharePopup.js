@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Button, Modal, ModalBody, ModalHeader, ModalFooter } from 'mdbreact';
 
+import * as urls from '../constants/urls'
+
 class SharePopup extends Component {
     
 
@@ -9,7 +11,9 @@ class SharePopup extends Component {
             <div id="sharePopup-root">
             <Modal isOpen={this.props.isOpen} toggle={this.props.toggleForm}>
                 <ModalBody>
-                    <p>Link will go here</p>
+                    <p>Share your list via this link:</p>
+                    <a>{urls.CLIENT + "subscribe?listId=" + this.props.currentListId}</a>
+                    <br/>
                     <p>Or you can send them this code: {this.props.currentListId} </p>
                 </ModalBody>
                 <ModalFooter>

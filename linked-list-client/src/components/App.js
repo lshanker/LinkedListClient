@@ -3,6 +3,7 @@ import {
   BrowserRouter as Router,
   Route,
  } from 'react-router-dom';
+
 import { firebase } from '../firebase';
 import logo from './logo.svg';
 import './App.css';
@@ -14,7 +15,7 @@ import SignUp from './SignUp';
 import Home from './Home';
 import Account from './Account';
 import PasswordForget from './PasswordForget';
-
+import Subscribe from './Subscribe';
 
 import * as routes from '../constants/routes';
 
@@ -56,6 +57,7 @@ class App extends Component {
   }
 
 
+
   render(){
     return(
     <Router>
@@ -88,6 +90,10 @@ class App extends Component {
         <Route
           exact path={routes.PASSWORD_FORGET}
           component={() => <PasswordForget />}
+        />
+        <Route
+          exact path={routes.SUBSCRIBE}
+          component={() => <Subscribe />}
         />
       </div>
        
