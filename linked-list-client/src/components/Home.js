@@ -56,7 +56,7 @@ class Home extends Component {
             <div className="col-1"></div>
             <div className="col-6">
 
-            <button type="button" class="btn btn-elegant" onClick = {() => {this.toggleSharePopup()}}><i class="fa fa-share-square" aria-hidden="true"></i>Share List</button>
+            <button type="button" class="btn btn-elegant" onClick = {() => {this.toggleSharePopup()}}><i class="fa fa-share-square" aria-hidden="true"></i> Share List</button>
             {this.state.newListFormVisible && <NewListForm userModel = {this.props.userModel} isOpen = {this.state.newListFormVisible} toggle =  {this.toggleNewListForm.bind(this)}/>}
             {this.state.sharePopupVisible && <SharePopup currentListId = {this.state.currentListId} isOpen = {this.state.sharePopupVisible} toggle =  {this.toggleSharePopup.bind(this)}/>}
 

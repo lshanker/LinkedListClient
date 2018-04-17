@@ -5,6 +5,8 @@ import {CopyToClipboard} from 'react-copy-to-clipboard';
 import * as urls from '../constants/urls'
 import { link } from 'fs';
 
+import './SharePopup.css';
+
 class SharePopup extends Component {
     
     constructor(props){
@@ -25,14 +27,18 @@ class SharePopup extends Component {
             <Modal isOpen={this.props.isOpen} toggle={this.props.toggleForm}>
                 <ModalBody>
                     <p>Share your list via this link:</p>
-                    <p>{this.state.linkText}</p>
-                    <CopyToClipboard 
+                    <div class="card mx-auto">
+                        <div class="card-body">
+                         <p>{this.state.linkText}</p>
+                        </div>
+                        <CopyToClipboard 
                         text={this.state.linkText}
                         onCopy={ () => console.log('copied')}>
-                        <button>Copy to clipboard</button>
+                        <button type="button" class="btn btn-info"><i class="fa fa-clipboard"></i> Copy Link</button>
                     </CopyToClipboard>
+                    </div>
                     <br/>
-                    <p>Or you can send them this code: {this.props.currentListId} </p>
+                    <p>Or they can enter this code: {this.props.currentListId} </p>
                 </ModalBody>
                 <ModalFooter>
                     <Button color="secondary" onClick={() => this.props.toggle()}>Close</Button>{' '}
