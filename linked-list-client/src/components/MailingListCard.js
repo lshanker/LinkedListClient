@@ -13,7 +13,7 @@ class MailingListCard extends Component {
     render(){
 
         return(
-            <div id="mailingListCard-root">
+            <div id="mailingListCard-root" onClick = {() => this.props.setCurrentList(this.props.tag)}>
                 <h1>{this.props.name}</h1>
                 <p>@{this.props.tag}</p>
             </div>

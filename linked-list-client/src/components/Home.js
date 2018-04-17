@@ -6,6 +6,7 @@ import withAuthorization from './withAuthorization'
 import NavbarFeatures from './NavbarFeatures'
 import NewListForm from './NewListForm';
 import SideList from './SideList';
+import EmailForm from './EmailForm';
 
 import './Home.css';
 
@@ -17,7 +18,12 @@ class Home extends Component {
     this.state = {
       users: null,
       newListFormVisible: false,
+      currentListId: null,
     }
+  }
+
+  setCurrentListId(currentListId) {
+    this.setState({currentListId});
   }
 
   componentDidMount(){
@@ -38,14 +44,13 @@ class Home extends Component {
           <NavbarFeatures />
           <div className="row" id="home-row">
             <div className="col-2">
-              <SideList uid={this.props.userModel.uid}/>
+              <SideList uid={this.props.userModel.uid} setCurrentList = {this.setCurrentListId.bind(this)}    />
             </div>
-            <div className="col-10">
-              <h1>Looks like the home page!</h1>
-              {/*Only display the new list form on button click*/}
-              {this.state.newListFormVisible && <NewListForm userModel = {this.props.userModel} isOpen = {this.state.newListFormVisible} toggle = {this.toggleNewListForm.bind(this)} /> }
-              { !!users && <UserList users={users} /> }
-              <button onClick = {() => this.toggleNewListForm()}>Toggle Form</button>
+            <div className="col-1"></div>
+            <div className="col-6">
+            {this.state.newListFormVisible && <NewListForm userModel = {this.props.userModel} isOpen = {this.state.newListFormVisible} toggle =  {this.toggleNewListForm.bind(this)}/>}
+              <EmailForm email = {this.props.userModel.email} currentListId = {this.state.currentListId}/>
+              <button onClick={() => this.toggleNewListForm()}>toggle form</button>
             </div>
           <div/>
       </div>

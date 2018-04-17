@@ -1,3 +1,7 @@
 #home-root, #home-row {
     height: 100%;
 }
+
+#home-root .col-2 {
+    min-width: 210px;
+}

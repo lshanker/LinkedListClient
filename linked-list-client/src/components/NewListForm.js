@@ -50,16 +50,6 @@ class NewListForm extends Component {
                 this.setState(byPropKey('error', error));
             });
 
-
-
-        /*db.doCreateList(listID, listName, this.props.userModel.uid)
-            .then(() => {
-                console.log("Created list " + listName);
-            })
-            .catch(error => {
-                console.log("Create list error: " + error.message);
-                this.setState(byPropKey('error', error));
-            });*/
     }
     
     render(){
