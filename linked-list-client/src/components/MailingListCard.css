@@ -1,6 +1,6 @@
 #mailingListCard-root {
     padding: 10px;
-    border-bottom: solid lightgray 1px;
+    /* border-bottom: solid lightgray 1px; */
     margin-top: 0px;
 }
 
@@ -8,15 +8,27 @@
     font-size: 1.2em;
     margin-bottom: 0px;
     word-wrap: break-word;
+    color: black;
 }
 
 #mailingListCard-root p{
     font-size: 0.9em;
     margin: 0px;
-    color: gray;
+    color: black;
 }
 
+#mailingListCard-root button:hover {
+    background-color: lightblue;
+}
 
-#mailingListCard-root:hover {
-    background-color: #e8f7ff;
+#mailingListCard-root button{
+    width: 150px;
+    overflow-wrap: normal;
+}
+
+#mailingListCard-root{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow-wrap: normal;
 }
