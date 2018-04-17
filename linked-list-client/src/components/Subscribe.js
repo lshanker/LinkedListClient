@@ -24,7 +24,7 @@ class Subscribe extends Component {
       const parsedQuery = queryString.parse(this.props.location.search);
       const listId = parsedQuery.listId;
 
-      db.Subscribe(listId, this.state.email, () => {
+      db.subscribe(listId, this.state.email, () => {
         console.log('Successfully subscribed');
       });
       console.log(listId);
