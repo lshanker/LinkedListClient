@@ -62,10 +62,20 @@ def add():
     email = request.args.get('email')
     firebase = pyrebase.initialize_app(config)
     auth = firebase.auth()
+    
     user = auth.sign_in_with_email_and_password("hgsata@gmail.com", "testuser")
     db = firebase.database()
     data = json.dumps(email)
-    db.child("lists").child(mailList).child("members").push(email)
+    db = firebase.database()
+    res = db.child("lists").child(mailList).child("members").get()
+    count = 0
+    for i in res.each():
+        if(i.val() == email):
+            count = count + 1
+    # print(count)
+    if(count == 0):
+        db.child("lists").child(mailList).child("members").push(email)
+
     
     return "gfdsg"
 @app.route('/uniqueList', methods=['GET'])
@@ -111,4 +121,4 @@ def delete():
 
 
 if __name__ == "__main__":
-    app.run(debug=True, host='0.0.0.0')
+    app.run(host='0.0.0.0')
