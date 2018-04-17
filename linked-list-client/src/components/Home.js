@@ -8,6 +8,8 @@ import NewListForm from './NewListForm';
 import SideList from './SideList';
 import EmailForm from './EmailForm';
 import SharePopup from './SharePopup';
+import ModeratorForm from './ModeratorForm';
+import ModeratorFormContainer from './ModeratorFormContainer'
 
 import './Home.css';
 
@@ -20,6 +22,7 @@ class Home extends Component {
       users: null,
       newListFormVisible: false,
       sharePopupVisible: false,
+      moderatorFormVisible: false,
       currentListId: null,
     }
   }
@@ -43,6 +46,10 @@ class Home extends Component {
     this.setState({sharePopupVisible: !this.state.sharePopupVisible})
   }
 
+  toggleModeratorForm = () => {
+    this.setState({moderatorFormVisible: !this.state.moderatorFormVisible})
+  }
+
   render() {
     const { users } = this.state;
 
@@ -64,8 +71,12 @@ class Home extends Component {
               {/* {var ? ifTrue : ifFalse} */}
               {this.state.currentListId ? 
               <div>
-                <EmailForm email = {this.props.userModel.email} currentListId = {this.state.currentListId}/> 
+                {this.state.moderatorFormVisible ?
+                <ModeratorFormContainer />
+                : <EmailForm email = {this.props.userModel.email} currentListId = {this.state.currentListId}/> 
+                }
                 <button type="button" class="btn btn-outline-elegant mx-auto" onClick = {() => {this.toggleSharePopup()}}><i class="fa fa-share-square" aria-hidden="true"></i> Share List</button>
+                <button type="button" class="btn btn-primary" onClick = {() => {this.toggleModeratorForm()}}>View Pending Emails</button>
                </div>
                : <h1><u><i>Select a list</i></u></h1>}              
 
