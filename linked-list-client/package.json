@@ -4,6 +4,7 @@
   "private": true,
   "mdbreact": "git+https://github.com/mdbootstrap/React-Bootstrap-with-Material-Design.git",
   "dependencies": {
+    "axios": "^0.18.0",
     "babel": "^6.23.0",
     "babel-plugin-module-alias": "^1.6.0",
     "bootstrap": "4.0.0",
