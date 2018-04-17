@@ -36,6 +36,18 @@ export const doAddListMember = (listID, uid, email) => {
 
 }
 
+export const doStoreEmail = (subject, message, listID, email) => {
+  const dateTime = Date.now();
+  const timestamp = Math.floor(dateTime / 1000);
+
+  db.ref(`emails/${listID}/${timestamp}`).update({
+    subject,
+    message,
+    listID,
+    email,
+  })
+}
+
 
 /******Functions for reading from the database******/
 

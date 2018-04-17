@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import firebase from 'firebase/app'
 import { auth, db } from '../firebase';
 
-import * as routes from '../constants/routes';
-
 
 const INITIAL_STATE = {
     subject: '',
@@ -24,14 +22,16 @@ class EmailForm extends Component{
     }
 
     onSubmit= (event) => {
-        // event.preventDefault;
+        event.preventDefault();
 
         const {
             subject,
             message,
         } = this.state;
 
-
+        
+        console.log(subject + message);
+        db.doStoreEmail(subject, message, this.props.currentListId, this.props.email);
     }
 
     render(){
@@ -39,7 +39,8 @@ class EmailForm extends Component{
         const {
             subject,
             message,
-            // error,
+            // error, 
+            // What to do with this?
           } = this.state;
 
         return (

@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { db } from '../firebase';
 
 import './SideList.css'
-import MailingListCard from './MailingListCard';
+import CardList from './CardList'
+
 
 
 class SideList extends Component {
@@ -34,23 +35,11 @@ class SideList extends Component {
         return(
             <div id="sideList-root">
                 <p className="h4 text-center py-4">My Lists</p>
-                {!!this.state.lists && <CardList mailingListCards={this.state.lists}/>}
+                {!!this.state.lists && <CardList mailingListCards={this.state.lists} setCurrentList = {this.props.setCurrentList}/>}
             </div>
         )
     }
 
 }
-
-
-const CardList = ({ mailingListCards }) => 
-    <div>
-        {Object.keys(mailingListCards).map(key =>
-        <MailingListCard 
-            key={key}
-            name = {key}
-            tag = {mailingListCards[key]}
-            />
-         )}
-    </div>
 
 export default SideList;
