@@ -4,3 +4,4 @@ export const LANDING = '/';
 export const HOME = '/home';
 export const ACCOUNT = '/account';
 export const PASSWORD_FORGET = '/forgotpassword';
+export const SUBSCRIBE = '/subscribe'

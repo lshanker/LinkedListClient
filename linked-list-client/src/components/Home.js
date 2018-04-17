@@ -7,6 +7,7 @@ import NavbarFeatures from './NavbarFeatures'
 import NewListForm from './NewListForm';
 import SideList from './SideList';
 import EmailForm from './EmailForm';
+import SharePopup from './SharePopup';
 
 import './Home.css';
 
@@ -18,6 +19,7 @@ class Home extends Component {
     this.state = {
       users: null,
       newListFormVisible: false,
+      sharePopupVisible: false,
       currentListId: null,
     }
   }
@@ -36,10 +38,9 @@ class Home extends Component {
     this.setState({newListFormVisible: !this.state.newListFormVisible})
   }
 
-  renderListSelectMessage(){
-    return(
-      <h1>Select a List</h1>
-    )
+
+  toggleSharePopup = () => {
+    this.setState({sharePopupVisible: !this.state.sharePopupVisible})
   }
 
   render() {
@@ -54,11 +55,17 @@ class Home extends Component {
             </div>
             <div className="col-1"></div>
             <div className="col-6">
+
+            <button type="button" class="btn btn-elegant" onClick = {() => {this.toggleSharePopup()}}><i class="fa fa-share-square" aria-hidden="true"></i>Share List</button>
+            {this.state.newListFormVisible && <NewListForm userModel = {this.props.userModel} isOpen = {this.state.newListFormVisible} toggle =  {this.toggleNewListForm.bind(this)}/>}
+            {this.state.sharePopupVisible && <SharePopup currentListId = {this.state.currentListId} isOpen = {this.state.sharePopupVisible} toggle =  {this.toggleSharePopup.bind(this)}/>}
+
               {/* {this.state.currentListId && <EmailForm email = {this.props.userModel.email} currentListId = {this.state.currentListId}/>} */}
               {/* {var ? ifTrue : ifFalse} */}
               {this.state.currentListId ? 
                <EmailForm email = {this.props.userModel.email} currentListId = {this.state.currentListId}/> 
                : <h1><u><i>Select a list</i></u></h1>}              
+
               <button onClick={() => this.toggleNewListForm()}>toggle form</button>
             </div>
           <div/>

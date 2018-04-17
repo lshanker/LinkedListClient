@@ -10,10 +10,14 @@ class MailingListCard extends Component {
     }
     
     
+    handleClick = () => {
+        this.props.setCurrentList(this.props.tag);
+    }
+
     render(){
 
         return(
-            <div id="mailingListCard-root" onClick = {() => this.props.setCurrentList(this.props.tag)}>
+            <div id="mailingListCard-root" onClick = {() => this.handleClick()}>
                 <h1>{this.props.name}</h1>
                 <p>@{this.props.tag}</p>
             </div>
