@@ -6,6 +6,7 @@ import withAuthorization from './withAuthorization'
 import NavbarFeatures from './NavbarFeatures'
 import NewListForm from './NewListForm';
 import SideList from './SideList';
+import EmailForm from './EmailForm';
 
 import './Home.css';
 
@@ -41,11 +42,12 @@ class Home extends Component {
               <SideList uid={this.props.userModel.uid}/>
             </div>
             <div className="col-10">
-              <h1>Looks like the home page!</h1>
+              {/* <h1>Looks like the home page!</h1>
               {/*Only display the new list form on button click*/}
-              {this.state.newListFormVisible && <NewListForm userModel = {this.props.userModel} isOpen = {this.state.newListFormVisible} toggle = {this.toggleNewListForm.bind(this)} /> }
+              {/*this.state.newListFormVisible && <NewListForm userModel = {this.props.userModel} isOpen = {this.state.newListFormVisible} toggle = {this.toggleNewListForm.bind(this)} /> }
               { !!users && <UserList users={users} /> }
-              <button onClick = {() => this.toggleNewListForm()}>Toggle Form</button>
+              <button onClick = {() => this.toggleNewListForm()}>Toggle Form</button> */}
+              <EmailForm />
             </div>
           <div/>
       </div>
