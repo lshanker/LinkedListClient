@@ -14,3 +14,12 @@
 #sideList-root > #mailingListCard-root {
     padding-top: 0px;
 }
+
+.newListButton{
+    border: 1px solid black;
+    height: 30px;
+}
+
+.buttonText{
+    color: black;
+}

@@ -37,9 +37,9 @@ class Home extends Component {
     );
   }
 
-  toggleNewListForm = () => {
-    this.setState({newListFormVisible: !this.state.newListFormVisible})
-  }
+  // toggleNewListForm = () => {
+  //   this.setState({newListFormVisible: !this.state.newListFormVisible})
+  // }
 
 
   toggleSharePopup = () => {
