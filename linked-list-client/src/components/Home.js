@@ -54,7 +54,6 @@ class Home extends Component {
             </div>
             <div className="col-1"></div>
             <div className="col-6">
-              {/* {this.state.currentListId && <EmailForm email = {this.props.userModel.email} currentListId = {this.state.currentListId}/>} */}
               {/* {var ? ifTrue : ifFalse} */}
               {this.state.currentListId ? 
                <EmailForm email = {this.props.userModel.email} currentListId = {this.state.currentListId}/> 
