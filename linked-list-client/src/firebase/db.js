@@ -89,4 +89,8 @@ export const continuousGetList = (uid, func) =>
     func(snapshot)
   });
 
+  export const continuousGetEmails = (lid, func) =>
+  db.ref(`emails/${lid}`).on('value', function(snapshot){
+    func(snapshot)
+  });
 // Other Entity APIs ...

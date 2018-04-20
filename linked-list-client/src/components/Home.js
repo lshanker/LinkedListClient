@@ -72,7 +72,7 @@ class Home extends Component {
               {this.state.currentListId ? 
               <div>
                 {this.state.moderatorFormVisible ?
-                <ModeratorFormContainer />
+                <ModeratorFormContainer listId = {this.state.currentListId}/>
                 : <EmailForm email = {this.props.userModel.email} currentListId = {this.state.currentListId}/> 
                 }
                 <button type="button" class="btn btn-outline-elegant mx-auto" onClick = {() => {this.toggleSharePopup()}}><i class="fa fa-share-square" aria-hidden="true"></i> Share List</button>

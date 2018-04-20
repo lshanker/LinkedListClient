@@ -9,6 +9,7 @@ import { auth, db } from '../firebase';
 const INITIAL_STATE = {
     subject: '',
     message: '',
+    email: '',
     error: null,
   };
 
@@ -17,7 +18,7 @@ const INITIAL_STATE = {
   });
 
 
-class EmailForm extends Component{
+class ModeratorForm extends Component{
 
     constructor(props){
         super(props);
@@ -26,18 +27,20 @@ class EmailForm extends Component{
 
     onSubmit= (event) => {
         event.preventDefault();
-        
     }
 
+    componentDidMount(){
+        for(var key in this.props.currentEmail){
+            this.setState({email : this.props.currentEmail[key]})
+        }
+    }
+
+    
+    
     render(){
-
-        const {
-            subject,
-            message,
-            // error, 
-            // What to do with this?
-          } = this.props;
-
+        //console.log(
+        //    (this.props)
+        //);
         return (
         
             <form onSubmit={this.onSubmit}>
@@ -48,15 +51,15 @@ class EmailForm extends Component{
                         className="mt-3" 
                         placeholder="Subject" 
                         type="text" 
-                        value={subject}   
+                        value={!!this.state.email ? this.state.email : "null error"}   
                     />
                     <textarea
                         contentEditable="false"
                         className="form-control mt-3 md-textarea width:100%"
                         rows="3" 
                         placeholder="Enter your message here" 
-                        type="text" 
-                        value={message} 
+                        type="text"
+                        value={"!!this.state.email && this.state.email"} 
                     />
                 
                     <div className="text-center">
@@ -70,4 +73,4 @@ class EmailForm extends Component{
 
 }
 
-export default EmailForm;
+export default ModeratorForm;
