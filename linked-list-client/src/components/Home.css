@@ -1,5 +1,6 @@
 #home-root, #home-row {
     height: 100%;
+    text-align: center;
 }
 
 #home-root .col-2 {

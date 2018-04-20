@@ -54,7 +54,7 @@ class Home extends Component {
     const { users } = this.state;
 
     return (
-      <div id="home-root">
+      <div id="home-root" className="mx-auto">
           <NavbarFeatures />
           <div className="row" id="home-row">
             <div className="col-2">
@@ -79,8 +79,6 @@ class Home extends Component {
                 <button type="button" class="btn btn-primary" onClick = {() => {this.toggleModeratorForm()}}>View Pending Emails</button>
                </div>
                : <h1><u><i>Select a list</i></u></h1>}              
-
-              <button onClick={() => this.toggleNewListForm()}>toggle form</button>
             </div>
           <div/>
       </div>

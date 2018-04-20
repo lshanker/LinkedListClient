@@ -1,7 +1,7 @@
 #mailingListCard-root {
-    padding: 10px;
     /* border-bottom: solid lightgray 1px; */
     margin-top: 0px;
+    text-align: center;
 }
 
 #mailingListCard-root h1{
@@ -14,7 +14,7 @@
 #mailingListCard-root p{
     font-size: 0.9em;
     margin: 0px;
-    color: black;
+    color: gray;
 }
 
 #mailingListCard-root button:hover {
@@ -22,11 +22,12 @@
 }
 
 #mailingListCard-root button{
-    width: 150px;
+    width: 200px;
     overflow-wrap: normal;
+    text-transform: none;
 }
 
-#mailingListCard-root{
+#mailingListCard-root *{
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
