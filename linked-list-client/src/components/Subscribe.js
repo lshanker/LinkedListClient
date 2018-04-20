@@ -7,6 +7,7 @@ const queryString = require('query-string');
 
 const INITIAL_STATE = {
     email: '',
+    listId: null,
   };
 
 
@@ -18,16 +19,20 @@ class Subscribe extends Component {
         this.state = { ...INITIAL_STATE };
     }
 
+
+    componentDidMount(){
+      const parsedQuery = queryString.parse(this.props.location.search);
+      const listId = parsedQuery.listId;
+      this.setState({listId});
+    }
+
     onSubmit = (event) => {
       event.preventDefault();
 
-      const parsedQuery = queryString.parse(this.props.location.search);
-      const listId = parsedQuery.listId;
-
-      db.subscribe(listId, this.state.email, () => {
+      db.subscribe(this.state.listId, this.state.email, () => {
         console.log('Successfully subscribed');
       });
-      console.log(listId);
+ 
     }
 
     
@@ -35,31 +40,36 @@ class Subscribe extends Component {
 
         const{
             email,
+            listId,
         } = this.state;
 
         return(
-          <form onSubmit={this.onSubmit}>
+          <div className="card mx-auto">
+           <div className="cardBody">
+            <form onSubmit={this.onSubmit}>
 
-            <p className="h4 text-center py-4">Subscribe</p>
+              <p className="h4 text-center py-4">Subscribe to @{this.state.listId}</p>
+      
+              <div className = "md-form">
+                <input
+                  id="email"
+                  value = {email}
+                  onChange={event => this.setState({"email": event.target.value})}
+                  type="text"
+                  placeholder="Email"
+                  className="form-control"
+                />
+              </div>
+              
+              <div className="text-center mt-4">
+                <button  className="btn btn-primary" type="submit">
+                Subscirbe
+                </button>
+              </div>
     
-            <div className = "md-form">
-              <input
-                id="email"
-                value = {email}
-                onChange={event => this.setState({"email": event.target.value})}
-                type="text"
-                placeholder="Email"
-                className="form-control"
-              />
-            </div>
-            
-            <div className="text-center mt-4">
-              <button  className="btn btn-primary" type="submit">
-              Subscirbe
-              </button>
-            </div>
-  
-          </form>
+            </form>
+          </div>
+        </div>
         )
     }
 }

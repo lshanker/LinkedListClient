@@ -79,7 +79,6 @@ export const doStoreEmail = (subject, message, listID, email) => {
 export const onceGetUsers = () =>
   db.ref('users').once('value');
 
-
 //Get all of a user's lists
 export const onceGetLists = (uid) =>
   db.ref(`users/${uid}/lists`).once('value');

@@ -54,7 +54,7 @@ class Home extends Component {
     const { users } = this.state;
 
     return (
-      <div id="home-root" className="mx-auto">
+      <div id="home-root">
           <NavbarFeatures />
           <div className="row" id="home-row">
             <div className="col-2">

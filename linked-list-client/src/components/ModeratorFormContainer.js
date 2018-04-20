@@ -7,27 +7,26 @@ class ModeratorFormContainer extends Component {
     constructor(props){
         super(props);
         this.state = {
-          email : null,
+          emails : null,
           currentEmail : null
         }
     }
-    selectEmail(idx){
-        var list = this.state.email;
+
+    selectEmail = (i) => {
+        var list = this.state.emails;
         var counter = 0;
         for(var emailId in list){
-            if(counter == idx){
-                this.setState({currentEmail : list[emailId]})    
-                console.log(emailId + " " + list[emailId])
-                console.log(list[emailId].email)
+            if(counter == i){
+                this.setState({currentEmail : list[emailId]})
             }
             counter++;
- 
         }
     }
+    
     componentDidMount(){
         db.continuousGetEmails(this.props.listId, (snapshot) => {
             console.log(snapshot.val());
-            this.setState({email : snapshot.val()});
+            this.setState({emails : snapshot.val()});
             this.selectEmail(0);         
         });
     }
@@ -35,7 +34,7 @@ class ModeratorFormContainer extends Component {
     render(){
         return(
             <div id="moderatorFormContainer-root">
-                <ModeratorForm currentEmail={this.state.currentEmail} />
+                <ModeratorForm  email = {this.state.currentEmail}/>
             </div>
         )
     }

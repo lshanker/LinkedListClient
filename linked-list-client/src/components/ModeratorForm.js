@@ -5,14 +5,6 @@ import * as urls from '../constants/urls'
 
 import { auth, db } from '../firebase';
 
-
-const INITIAL_STATE = {
-    subject: '',
-    message: '',
-    email: '',
-    error: null,
-  };
-
   const byPropKey = (propertyName, value) => () => ({
     [propertyName]: value,
   });
@@ -22,7 +14,6 @@ class ModeratorForm extends Component{
 
     constructor(props){
         super(props);
-        this.state={...INITIAL_STATE};
     }
 
     onSubmit= (event) => {
@@ -30,28 +21,25 @@ class ModeratorForm extends Component{
     }
 
     componentDidMount(){
-        for(var key in this.props.currentEmail){
-            this.setState({email : this.props.currentEmail[key]})
-        }
+   
     }
-
     
     
     render(){
-        //console.log(
-        //    (this.props)
-        //);
+        
+
         return (
         
             <form onSubmit={this.onSubmit}>
                 <p className="h5 text-center mb-4 mt-4">Pending Email</p>
+                <p>Sender: {!!this.props.email ? this.props.email.email : ""}</p>
                 <div className="md-form">
                     <input
                         contentEditable="false"
                         className="mt-3" 
                         placeholder="Subject" 
                         type="text" 
-                        value={!!this.state.email ? this.state.email : "null error"}   
+                        value={!!this.props.email ? this.props.email.subject : ""}   
                     />
                     <textarea
                         contentEditable="false"
@@ -59,7 +47,7 @@ class ModeratorForm extends Component{
                         rows="3" 
                         placeholder="Enter your message here" 
                         type="text"
-                        value={"!!this.state.email && this.state.email"} 
+                        value={!!this.props.email ? this.props.email.message : ""} 
                     />
                 
                     <div className="text-center">
