@@ -93,16 +93,17 @@ class ModeratorFormContainer extends Component {
                 <ModeratorForm  email = {this.state.currentEmail}/>
                 <button 
                     className = "btn btn-outline-primary"
-                    disabled = {this.state.currentEmailIndex === 0}
+                    disabled = {this.state.currentEmailIndex === 0 || this.state.numEmails == 0}
                     onClick = {() => {this.getPreviousEmail()}}>
                     <i className="fa fa-arrow-circle-left" aria-hidden="true"></i>
                 </button>
                 <button 
                     className = "btn btn-outline-primary"
-                    disabled = {this.state.currentEmailIndex === (this.state.numEmails - 1)}
+                    disabled = {this.state.currentEmailIndex === (this.state.numEmails - 1) || this.state.numEmails == 0}
                     onClick = {() => {this.getNextEmail()}}>
                     <i className="fa fa-arrow-circle-right" aria-hidden="true"></i>
                 </button>
+                {this.state.numEmails == 0 && <p>This list has no pending emails</p>}
             </div>
         )
     }
