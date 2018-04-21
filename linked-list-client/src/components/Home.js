@@ -29,6 +29,7 @@ class Home extends Component {
 
   setCurrentListId(currentListId) {
     this.setState({currentListId});
+    this.setState({moderatorFormVisible : false})
   }
 
   componentDidMount(){
