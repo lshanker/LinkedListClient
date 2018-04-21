@@ -3,6 +3,8 @@ import { db } from '../firebase';
 
 import { withRouter } from 'react-router-dom';
 
+import './Subscribe.css'
+
 const queryString = require('query-string');
 
 const INITIAL_STATE = {
@@ -44,30 +46,32 @@ class Subscribe extends Component {
         } = this.state;
 
         return(
-          <div className="card mx-auto">
-           <div className="cardBody">
-            <form onSubmit={this.onSubmit}>
+          <div id="subscribe-root">
+            <div className="card mx-auto">
+            <div className="cardBody">
+              <form onSubmit={this.onSubmit}>
 
-              <p className="h4 text-center py-4">Subscribe to @{this.state.listId}</p>
+                <p className="h4 text-center py-4">Subscribe to @{this.state.listId}</p>
+        
+                <div className = "md-form">
+                  <input
+                    id="email"
+                    value = {email}
+                    onChange={event => this.setState({"email": event.target.value})}
+                    type="text"
+                    placeholder="Email"
+                    className="form-control"
+                  />
+                </div>
+                
+                <div className="text-center mt-4">
+                  <button  className="btn btn-primary" type="submit">
+                  Subscirbe
+                  </button>
+                </div>
       
-              <div className = "md-form">
-                <input
-                  id="email"
-                  value = {email}
-                  onChange={event => this.setState({"email": event.target.value})}
-                  type="text"
-                  placeholder="Email"
-                  className="form-control"
-                />
-              </div>
-              
-              <div className="text-center mt-4">
-                <button  className="btn btn-primary" type="submit">
-                Subscirbe
-                </button>
-              </div>
-    
-            </form>
+              </form>
+            </div>
           </div>
         </div>
         )

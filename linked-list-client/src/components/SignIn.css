@@ -1,11 +1,20 @@
 
 /*Not working*/
-div.sign-in-root {
-   background: #000000;
+#signIn-root {
+   position: absolute;
+   margin: auto;
+   top: 0;
+   right: 0;
+   bottom: 0;
+   left: 0;
+   width: 500px;
+   height: 500px;
+   text-align: center;
 }
 
 .card {
     width: 25%;
     min-width: 380px;
     padding: 20px;
+
 }
