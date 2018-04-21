@@ -77,7 +77,12 @@ class Home extends Component {
                 : <EmailForm email = {this.props.userModel.email} currentListId = {this.state.currentListId}/> 
                 }
                 <button type="button" class="btn btn-outline-elegant mx-auto" onClick = {() => {this.toggleSharePopup()}}><i class="fa fa-share-square" aria-hidden="true"></i> Share List</button>
-                <button type="button" class="btn btn-primary" onClick = {() => {this.toggleModeratorForm()}}>View Pending Emails</button>
+                <button type="button" class="btn btn-primary" onClick = {() => {this.toggleModeratorForm()}}>
+                  {this.state.moderatorFormVisible ?
+                    ("Mail @" + this.state.currentListId) :
+                    "View Pending Emails"
+                  }
+                </button>
                </div>
                : <h1><u><i>Select a list</i></u></h1>}              
             </div>
