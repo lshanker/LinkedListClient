@@ -6,7 +6,6 @@ import CardList from './CardList'
 import NewListForm from './NewListForm'
 
 
-
 class SideList extends Component {
 
     constructor(props) {

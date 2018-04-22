@@ -59,13 +59,13 @@ class Home extends Component {
           <NavbarFeatures />
           <div className="row" id="home-row">
             <div className="col-2">
-              <SideList uid={this.props.userModel.uid} setCurrentList = {this.setCurrentListId.bind(this)} currentListId = {!!this.state.currentListId ? this.state.currentListId : ""}   />
+              <SideList userModel={this.props.userModel} setCurrentList = {this.setCurrentListId.bind(this)} currentListId = {!!this.state.currentListId ? this.state.currentListId : ""}   />
             </div>
             <div className="col-1"></div>
             <div className="col-6">
 
             
-            {this.state.newListFormVisible && <NewListForm userModel = {this.props.userModel} isOpen = {this.state.newListFormVisible} toggle =  {this.toggleNewListForm.bind(this)}/>}
+            {/*this.state.newListFormVisible && <NewListForm userModel = {this.props.userModel} isOpen = {this.state.newListFormVisible} toggle =  {this.toggleNewListForm.bind(this)}/>*/}
             {this.state.sharePopupVisible && <SharePopup currentListId = {this.state.currentListId} isOpen = {this.state.sharePopupVisible} toggle =  {this.toggleSharePopup.bind(this)}/>}
 
               {/* {this.state.currentListId && <EmailForm email = {this.props.userModel.email} currentListId = {this.state.currentListId}/>} */}
