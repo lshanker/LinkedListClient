@@ -17,12 +17,12 @@ class SideList extends Component {
     }
 
     componentDidMount(){
-        db.onceGetLists(this.props.uid).then(snapshot => {
+        db.onceGetLists(this.props.userModel.uid).then(snapshot => {
             this.setState(() => ({ lists: snapshot.val() }))
         }
         );
 
-        db.continuousGetList(this.props.uid, this.onMyListsChange);
+        db.continuousGetList(this.props.userModel.uid, this.onMyListsChange);
         
     }
 
