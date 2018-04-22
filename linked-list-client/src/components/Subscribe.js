@@ -5,7 +5,9 @@ import { withRouter } from 'react-router-dom';
 
 import './Subscribe.css'
 
-const queryString = require('query-string');
+import queryString from 'query-string';
+
+//const queryString = require('query-string');
 
 const INITIAL_STATE = {
     email: '',
