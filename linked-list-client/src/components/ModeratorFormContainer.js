@@ -2,11 +2,6 @@ import React, { Component } from 'react';
 import { db } from '../firebase';
 import ModeratorForm from './ModeratorForm';
 
-
-
-
-
-
 class ModeratorFormContainer extends Component {
     
 

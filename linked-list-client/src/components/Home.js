@@ -59,7 +59,7 @@ class Home extends Component {
           <NavbarFeatures />
           <div className="row" id="home-row">
             <div className="col-2">
-              <SideList uid={this.props.userModel.uid} setCurrentList = {this.setCurrentListId.bind(this)}    />
+              <SideList uid={this.props.userModel.uid} setCurrentList = {this.setCurrentListId.bind(this)} currentListId = {!!this.state.currentListId ? this.state.currentListId : ""}   />
             </div>
             <div className="col-1"></div>
             <div className="col-6">

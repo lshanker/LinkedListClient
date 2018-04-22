@@ -42,7 +42,7 @@ class SideList extends Component {
                 <button className="btn btn-outline-primary" onClick={() => this.toggleNewListForm()}><i className="fa fa-plus" aria-hidden="true"></i> New List</button>
 
                 <p className="h4 text-center py-4">My Lists</p>
-                {!!this.state.lists && <CardList mailingListCards={this.state.lists} setCurrentList = {this.props.setCurrentList}/>}
+                {!!this.state.lists && <CardList mailingListCards={this.state.lists} setCurrentList = {this.props.setCurrentList} currentListId = {this.props.currentListId}/>}
             </div>
         )
     }

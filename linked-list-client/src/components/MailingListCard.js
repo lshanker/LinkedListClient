@@ -16,13 +16,18 @@ class MailingListCard extends Component {
 
     render(){
 
+        var selectedBackground = "white";
+        if(this.props.currentListId === this.props.tag){
+            selectedBackground = 'lightblue';
+        }
+
         return(
-            // <div id="mailingListCard-root" onClick = {() => this.props.setCurrentList(this.props.tag)}>
-            //     <h1>{this.props.name}</h1>
-            //     <p>@{this.props.tag}</p>
-            // </div>
+
             <div id="mailingListCard-root">
-                <button  className="btn white-space:nowrap" onClick = {() => this.props.setCurrentList(this.props.tag)}>
+                <button  className="btn white-space:nowrap" 
+                onClick = {() => this.props.setCurrentList(this.props.tag)}
+                style={{backgroundColor : selectedBackground}}
+                >
                     <h1>{this.props.name}</h1>
                     <p>@{this.props.tag}</p>
                 </button>
