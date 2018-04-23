@@ -20,7 +20,6 @@ export const subscribe = (list, email, callback) => {
   return retVal;
 }
 
-
 function email(list, msg, subj, callback){
   //list=anotherlist&message=hi&subj=test
   var retVal = httpGet("email?list=" + list + "&message=" + msg + "&subj=" + subj, callback);
@@ -101,7 +100,6 @@ export const doDeleteList = (listID) =>{
 export const onceGetUsers = () =>
   db.ref('users').once('value');
 
-
 //Get all of a user's lists
 export const onceGetLists = (uid) =>
   db.ref(`users/${uid}/lists`).once('value');
@@ -111,4 +109,8 @@ export const continuousGetList = (uid, func) =>
     func(snapshot)
   });
 
+  export const continuousGetEmails = (lid, func) =>
+  db.ref(`emails/${lid}`).on('value', function(snapshot){
+    func(snapshot)
+  });
 // Other Entity APIs ...

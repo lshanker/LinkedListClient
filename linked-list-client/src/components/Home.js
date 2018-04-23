@@ -29,6 +29,7 @@ class Home extends Component {
 
   setCurrentListId(currentListId) {
     this.setState({currentListId});
+    this.setState({moderatorFormVisible : false})
   }
 
   componentDidMount(){
@@ -58,13 +59,12 @@ class Home extends Component {
           <NavbarFeatures />
           <div className="row" id="home-row">
             <div className="col-2">
-              <SideList uid={this.props.userModel.uid} setCurrentList = {this.setCurrentListId.bind(this)}    />
+              <SideList userModel={this.props.userModel} setCurrentList = {this.setCurrentListId.bind(this)} currentListId = {!!this.state.currentListId ? this.state.currentListId : ""}   />
             </div>
             <div className="col-1"></div>
             <div className="col-6">
 
-            
-            {this.state.newListFormVisible && <NewListForm userModel = {this.props.userModel} isOpen = {this.state.newListFormVisible} toggle =  {this.toggleNewListForm.bind(this)}/>}
+            {/*this.state.newListFormVisible && <NewListForm userModel = {this.props.userModel} isOpen = {this.state.newListFormVisible} toggle =  {this.toggleNewListForm.bind(this)}/>*/}
             {this.state.sharePopupVisible && <SharePopup currentListId = {this.state.currentListId} isOpen = {this.state.sharePopupVisible} toggle =  {this.toggleSharePopup.bind(this)}/>}
 
               {/* {this.state.currentListId && <EmailForm email = {this.props.userModel.email} currentListId = {this.state.currentListId}/>} */}
@@ -72,15 +72,18 @@ class Home extends Component {
               {this.state.currentListId ? 
               <div>
                 {this.state.moderatorFormVisible ?
-                <ModeratorFormContainer currentListId = {this.state.currentListId}/>
+                <ModeratorFormContainer listId = {this.state.currentListId}/>
                 : <EmailForm email = {this.props.userModel.email} currentListId = {this.state.currentListId}/> 
                 }
                 <button type="button" class="btn btn-outline-elegant mx-auto" onClick = {() => {this.toggleSharePopup()}}><i class="fa fa-share-square" aria-hidden="true"></i> Share List</button>
-                <button type="button" class="btn btn-primary" onClick = {() => {this.toggleModeratorForm()}}>View Pending Emails</button>
+                <button type="button" class="btn btn-primary" onClick = {() => {this.toggleModeratorForm()}}>
+                  {this.state.moderatorFormVisible ?
+                    ("Mail @" + this.state.currentListId) :
+                    "View Pending Emails"
+                  }
+                </button>
                </div>
                : <h1><u><i>Select a list</i></u></h1>}              
-
-              <button onClick={() => this.toggleNewListForm()}>toggle form</button>
             </div>
           <div/>
       </div>

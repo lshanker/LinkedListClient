@@ -12,7 +12,7 @@ import * as routes from '../constants/routes';
 import './SignUp.css'
 
 const SignUp = ({ history }) => 
-  <div>
+  <div id="signUp-root">
     <div className = "card mx-auto">
      <div className = "cardBody">
        <SignUpForm history={history} />

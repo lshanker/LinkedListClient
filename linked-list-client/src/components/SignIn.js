@@ -13,7 +13,7 @@ import './SignIn.css'
 
 
 const SignIn = ({ history }) =>
-  <div id="sign-in-root">
+  <div id="signIn-root">
     <div className = "card mx-auto">
       <div className = "cardBody">
         <SignInForm history={history} />
@@ -116,7 +116,7 @@ class SignInForm extends Component {
 
         { error && <p>{error.message}</p> }
       </form>
-    
+  
     );
   }
 }

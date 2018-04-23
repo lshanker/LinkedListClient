@@ -2,6 +2,7 @@
   "name": "linked-list-client",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://github.com/lshanker/LinkedListClient",
   "mdbreact": "git+https://github.com/mdbootstrap/React-Bootstrap-with-Material-Design.git",
   "dependencies": {
     "axios": "^0.18.0",
@@ -9,7 +10,9 @@
     "babel-plugin-module-alias": "^1.6.0",
     "bootstrap": "4.0.0",
     "firebase": "^4.12.1",
+    "firebase-tools": "3.18.4",
     "font-awesome": "4.7.0",
+    "gh-pages": "^1.1.0",
     "mdbreact": "^4.2.0",
     "query-string": "^6.0.0",
     "react": "^16.3.1",
@@ -17,7 +20,8 @@
     "react-dom": "^16.3.1",
     "react-error-overlay": "4.0.0",
     "react-icons": "^2.2.7",
-    "react-side-bar": "^0.3.5"
+    "react-side-bar": "^0.3.5",
+    "url-search-params": "^0.10.0"
   },
   "devDependencies": {
     "react-scripts": "1.1.4"
@@ -26,6 +30,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   }
 }

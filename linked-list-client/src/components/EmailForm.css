@@ -1,0 +1,9 @@
+#emailForm-root {
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+#emailForm-root, #emailForm-root > .card-body {
+    width: 90%;
+    text-align: center;
+}
