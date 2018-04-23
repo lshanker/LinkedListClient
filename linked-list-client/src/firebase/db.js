@@ -27,19 +27,21 @@ function email(list, msg, subj, callback){
 }
 
 
-export const doCreateUser = (id, username, email) =>
+export const doCreateUser = (id, username, email, isMod) =>
   db.ref(`users/${id}`).set({
     username,
     email,
+    isMod,
   }).then(() => {
       console.log('here')
   });
 
-export const doCreateList = (listID, name, uid, email) => 
+export const doCreateList = (listID, name, uid, email, isMod) => 
   db.ref(`lists/${listID}`).set({
     name,
+    isMod,
   }).then(()=>{
-    doAddListMember(listID, uid, email);
+    doAddListMember(listID, uid, email, isMod);
   });
 
 export const doAddListMember = (listID, uid, email) => {

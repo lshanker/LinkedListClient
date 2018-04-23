@@ -45,7 +45,7 @@ def mail():
     
     for pers in recipients:
        
-        msg = MIMEText(request.args.get('message') + '\n<a href=\"http://10.186.97.108:5000/unsub?list=anotherlist&email='+ pers +'\">Unsubscribe from this list </a>', 'html')
+        msg = MIMEText(request.args.get('message') + '\n\n<a href=\"http://10.186.97.108:5000/unsub?list=anotherlist&email='+ pers +'\">Unsubscribe from this list </a>', 'html')
         msg['Subject'] = request.args.get('subj')
         msg['From'] = "sorapwns12@gmail.com"
         msg['To'] = pers
