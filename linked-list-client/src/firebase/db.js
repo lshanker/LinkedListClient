@@ -1,7 +1,31 @@
 import { db } from './firebase';
-
+import * as urls from '../constants/urls'
 
 /*****Functions for writing to the database******/
+
+function httpGet(queryString, callback)
+{
+    var theUrl = urls.SERVER + queryString;  
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.onreadystatechange = function() { 
+        if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+            callback(xmlHttp.responseText);
+    }
+    xmlHttp.open("GET", theUrl, true); // true for asynchronous 
+    xmlHttp.send(null);
+}
+
+function subscribe(list, email, callback){
+  var retVal = httpGet("sub?list=" + list + "&email=" + email, callback);
+  return retVal;
+}
+
+function email(list, msg, subj, callback){
+  //list=anotherlist&message=hi&subj=test
+  var retVal = httpGet("email?list=" + list + "&message=" + msg + "&subj=" + subj, callback);
+  return retVal;
+}
+
 
 export const doCreateUser = (id, username, email) =>
   db.ref(`users/${id}`).set({
@@ -46,6 +70,27 @@ export const doStoreEmail = (subject, message, listID, email) => {
     listID,
     email,
   })
+}
+
+
+export const doDeleteList = (listID) =>{
+
+  console.log("helloworld");
+  console.log(listID);
+
+  const usersInList = db.ref(`lists/${listID}/members`);
+  console.log(usersInList);
+  usersInList.once("value").then(function(snapshot) {
+    snapshot.forEach(function(childSnapshot) {
+      var user = childSnapshot.key;
+      db.ref(`users/${user}/lists/${listID}`).remove();
+      console.log("hello?")
+    });
+  });
+
+  //db.ref(`modemails/${listID}`).remove();
+  //db.ref(`emails/${listID}`).remove();
+  //db.ref(`lists/${listID}`).remove();
 }
 
 

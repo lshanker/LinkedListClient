@@ -10,6 +10,10 @@ class MailingListCard extends Component {
     }
     
     
+    handleClick = () => {
+        this.props.setCurrentList(this.props.tag);
+    }
+
     render(){
 
         return(
