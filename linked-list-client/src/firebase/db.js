@@ -15,10 +15,11 @@ function httpGet(queryString, callback)
     xmlHttp.send(null);
 }
 
-function subscribe(list, email, callback){
+export const subscribe = (list, email, callback) => {
   var retVal = httpGet("sub?list=" + list + "&email=" + email, callback);
   return retVal;
 }
+
 
 function email(list, msg, subj, callback){
   //list=anotherlist&message=hi&subj=test
