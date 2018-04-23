@@ -65,7 +65,6 @@ class ModeratorForm extends Component{
     }   
 
 }
-=======
 ModeratorForm.defaultProps = {
     email: {
         subject: 'default subj',
