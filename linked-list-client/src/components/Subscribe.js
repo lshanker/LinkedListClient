@@ -3,6 +3,7 @@ import { db } from '../firebase';
 
 import { withRouter } from 'react-router-dom';
 
+
 import './Subscribe.css'
 
 //import queryString from 'query-string';
@@ -24,8 +25,6 @@ class Subscribe extends Component {
 
         this.state = { ...INITIAL_STATE };
     }
-
-
     componentDidMount(){
       var url = window.location.href;
       var query = url.substring(url.indexOf("?") + 1, url.length);
@@ -55,6 +54,7 @@ class Subscribe extends Component {
 
         const{
             email,
+
             listId,
         } = this.state;
 

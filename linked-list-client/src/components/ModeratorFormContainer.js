@@ -18,6 +18,13 @@ class ModeratorFormContainer extends Component {
         }
 
     }
+  
+  onSubmit = (event) => {
+        event.preventDefault();
+        console.log(this.props.currentListId);
+        db.doDeleteList(this.props.currentListId);
+
+    }
 
     selectEmailNoList = (i) => {
         console.log('in select email' + i);
@@ -85,6 +92,10 @@ class ModeratorFormContainer extends Component {
 
         return(
             <div id="moderatorFormContainer-root">
+                <form onSubmit={this.onSubmit}>
+                    <button className="btn #4a148c red darken-4">Delete Current List</button>
+                </form>
+
                 <ModeratorForm  email = {this.state.currentEmail}/>
                 <button 
                     className = "btn btn-outline-primary"
