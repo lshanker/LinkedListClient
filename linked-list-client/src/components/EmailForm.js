@@ -86,7 +86,7 @@ class EmailForm extends Component{
                     
                         <div className="text-center">
                             <button className="btn #4a148c purple darken-4"><i class="fa fa-send" aria-hidden="true"></i> Send</button>
-                            <button className="btn #ff5722 deep-orange">Discard</button>
+                            <button className="btn #ff5722 deep-orange"><i class="fa fa-trash-o" aria-hidden="true"></i> Discard</button>
                         </div>
                     </div>
                 </form>

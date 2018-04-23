@@ -7,7 +7,9 @@ class CardList extends Component {
         super(props);
     }
 
+
     render(){
+
         return(
             <div>
               {Object.keys(this.props.mailingListCards).map(key =>
@@ -16,6 +18,7 @@ class CardList extends Component {
                     tag = {key}
                     name = {this.props.mailingListCards[key]}
                     setCurrentList = {this.props.setCurrentList}
+                    currentListId = {this.props.currentListId}
                     />
                 )}
             </div>

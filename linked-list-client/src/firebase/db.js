@@ -15,7 +15,7 @@ function httpGet(queryString, callback)
     xmlHttp.send(null);
 }
 
-function subscribe(list, email, callback){
+export const subscribe = (list, email, callback) => {
   var retVal = httpGet("sub?list=" + list + "&email=" + email, callback);
   return retVal;
 }
@@ -79,7 +79,6 @@ export const doStoreEmail = (subject, message, listID, email) => {
 export const onceGetUsers = () =>
   db.ref('users').once('value');
 
-
 //Get all of a user's lists
 export const onceGetLists = (uid) =>
   db.ref(`users/${uid}/lists`).once('value');
@@ -89,4 +88,8 @@ export const continuousGetList = (uid, func) =>
     func(snapshot)
   });
 
+  export const continuousGetEmails = (lid, func) =>
+  db.ref(`emails/${lid}`).on('value', function(snapshot){
+    func(snapshot)
+  });
 // Other Entity APIs ...

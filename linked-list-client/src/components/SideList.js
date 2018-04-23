@@ -6,7 +6,6 @@ import CardList from './CardList'
 import NewListForm from './NewListForm'
 
 
-
 class SideList extends Component {
 
     constructor(props) {
@@ -18,12 +17,12 @@ class SideList extends Component {
     }
 
     componentDidMount(){
-        db.onceGetLists(this.props.uid).then(snapshot => {
+        db.onceGetLists(this.props.userModel.uid).then(snapshot => {
             this.setState(() => ({ lists: snapshot.val() }))
         }
         );
 
-        db.continuousGetList(this.props.uid, this.onMyListsChange);
+        db.continuousGetList(this.props.userModel.uid, this.onMyListsChange);
         
     }
 
@@ -39,10 +38,10 @@ class SideList extends Component {
         return(
             <div id="sideList-root">
                 {this.state.newListFormVisible && <NewListForm userModel = {this.props.userModel} isOpen = {this.state.newListFormVisible} toggle =  {this.toggleNewListForm.bind(this)}/>}          
-                <button className="btn btn-outline-primary" onClick={() => this.toggleNewListForm()}><i class="fa fa-plus" aria-hidden="true"></i> New List</button>
+                <button className="btn btn-outline-primary" onClick={() => this.toggleNewListForm()}><i className="fa fa-plus" aria-hidden="true"></i> New List</button>
 
                 <p className="h4 text-center py-4">My Lists</p>
-                {!!this.state.lists && <CardList mailingListCards={this.state.lists} setCurrentList = {this.props.setCurrentList}/>}
+                {!!this.state.lists && <CardList mailingListCards={this.state.lists} setCurrentList = {this.props.setCurrentList} currentListId = {this.props.currentListId}/>}
             </div>
         )
     }
