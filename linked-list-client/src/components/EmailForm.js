@@ -11,6 +11,7 @@ import './EmailForm.css'
 const INITIAL_STATE = {
     subject: '',
     message: '',
+    isMod: false,
     error: null,
   };
 
@@ -32,29 +33,36 @@ class EmailForm extends Component{
         const {
             subject,
             message,
+            isMod
         } = this.state;
 
-        
+        db.onceGetIsMod(this.props.currentListId).then(snapshot => {
+            var flag = !!snapshot.val();
+            this.setState(() => ({ isMod : flag}))
+        console.log("only" + this.state.isMod);
         console.log(subject + message);
-        if(this.props.isMod){
+        
+        if(this.state.isMod){
             db.doStoreModEmail(subject, message, this.props.currentListId, this.props.email);
-        }else{
-            db.doStoreModEmail(subject, message, this.props.currentListId, this.props.email);
-        }
+        } else {
+            db.doStoreEmail(subject, message, this.props.currentListId, this.props.email);
     
-        axios.get(urls.SERVER + "mail", {
-            params: {
-                "list": this.props.currentListId,
-                "message": message,
-                "subj": subject
+            axios.get(urls.SERVER + "mail", {
+                params: {
+                    "list": this.props.currentListId,
+                    "message": message,
+                    "subj": subject
+                }
+            })
+            .then(function (response) {
+                console.log(response);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
             }
-        })
-        .then(function (response) {
-            console.log(response);
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
+    });     
+        
     }
 
     render(){

@@ -62,12 +62,11 @@ export const doAddListMember = (listID, uid, email, isMod) => {
   });
 
 }
-
-export const doStoreEmail = (subject, message, listID, email) => {
+export const doStoreModEmail = (subject, message, listID, email) => {
   const dateTime = Date.now();
   const timestamp = Math.floor(dateTime / 1000);
 
-  db.ref(`emails/${listID}/${timestamp}`).update({
+  db.ref(`modemails/${listID}/${timestamp}`).update({
     subject,
     message,
     listID,
@@ -75,11 +74,11 @@ export const doStoreEmail = (subject, message, listID, email) => {
   })
 }
 
-export const doStoreModEmail = (subject, message, listID, email) => {
+export const doStoreEmail = (subject, message, listID, email) => {
   const dateTime = Date.now();
   const timestamp = Math.floor(dateTime / 1000);
 
-  db.ref(`modemails/${listID}/${timestamp}`).update({
+  db.ref(`emails/${listID}/${timestamp}`).update({
     subject,
     message,
     listID,
@@ -96,18 +95,19 @@ export const doDeleteList = (listID) =>{
   console.log(listID);
 
   const usersInList = db.ref(`lists/${listID}/members`);
-  console.log(usersInList);
-  usersInList.once("value").then(function(snapshot) {
-    snapshot.forEach(function(childSnapshot) {
-      var user = childSnapshot.key;
-      db.ref(`users/${user}/lists/${listID}`).remove();
-      console.log("hello?")
-    });
-  });
 
-  //db.ref(`modemails/${listID}`).remove();
-  //db.ref(`emails/${listID}`).remove();
-  //db.ref(`lists/${listID}`).remove();
+  usersInList.on("value", function(snapshot) {
+      console.log(snapshot.key);
+      console.log(snapshot.val());
+      snapshot.forEach(function(childSnapshot) {
+        var user = childSnapshot.key;
+        db.ref(`users/${user}/lists/${listID}`).remove();
+      })
+        
+        db.ref(`modemails/${listID}`).remove();
+        db.ref(`emails/${listID}`).remove();
+        db.ref(`lists/${listID}`).remove();
+    });
 }
 
 export const doDeleteModEmail = (lid, emailId) => {
@@ -128,13 +128,16 @@ export const onceGetLists = (uid) =>
 export const onceGetIsMod = (lid) => 
   db.ref(`lists/${lid}/isMod`).once('value');
 
+export const onceGetIsUserMod = (lid, uid) => 
+  db.ref(`lists/${lid}/members/${uid}/isMod`).once('value');
+
 export const continuousGetList = (uid, func) =>
   db.ref(`users/${uid}/lists`).on('value', function(snapshot){
     func(snapshot)
   });
 
   export const continuousGetEmails = (lid, func) =>
-  db.ref(`emails/${lid}`).on('value', function(snapshot){
+  db.ref(`modemails/${lid}`).on('value', function(snapshot){
     func(snapshot)
   });
 

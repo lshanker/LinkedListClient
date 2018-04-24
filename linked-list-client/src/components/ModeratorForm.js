@@ -46,10 +46,9 @@ class ModeratorForm extends Component{
     }
 
     handleRejectClick = () => {
-        console.log(this.props.emailId);
         db.doDeleteModEmail(this.props.listId, this.props.emailId);
         this.props.removeEmail();
-        this.forceUpdate();
+        //this.forceUpdate();
     }
     
     render(){

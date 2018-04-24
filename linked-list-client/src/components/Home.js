@@ -25,6 +25,7 @@ class Home extends Component {
       moderatorFormVisible: false,
       currentListId: null,
       showModButton: false,
+      showUserModButton: false
     }
   }
 
@@ -38,6 +39,12 @@ class Home extends Component {
       console.log(!!snapshot.val())
       var flag = !!snapshot.val();
       this.setState(() => ({ showModButton : flag}))
+    }); 
+    db.onceGetIsUserMod(currentListId, this.props.userModel.uid).then(snapshot => {
+      console.log(snapshot.val());
+      console.log(!!snapshot.val())
+      var flag = !!snapshot.val();
+      this.setState(() => ({ showUserModButton : flag}))
     }); 
   }
 
@@ -90,6 +97,7 @@ class Home extends Component {
                 }
                 <button type="button" class="btn btn-outline-elegant mx-auto" onClick = {() => {this.toggleSharePopup()}}><i class="fa fa-share-square" aria-hidden="true"></i> Share List</button>
                 {
+                this.state.showUserModButton &&
                 this.state.showModButton &&
                 <button type="button" class="btn btn-primary" onClick = {() => {this.toggleModeratorForm()}}>
                   {this.state.moderatorFormVisible ?

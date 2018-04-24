@@ -22,8 +22,8 @@ class ModeratorFormContainer extends Component {
   
   onSubmit = (event) => {
         event.preventDefault();
-        console.log(this.props.currentListId);
-        db.doDeleteList(this.props.currentListId);
+        console.log(this.props.listId);
+        db.doDeleteList(this.props.listId);
 
     }
 
@@ -36,6 +36,7 @@ class ModeratorFormContainer extends Component {
             if(counter == i){
                 console.log('here1');
                 this.setState({currentEmail : list[emailId]})
+                this.setState({currentEmailId : emailId})
             }
             counter++;
         }
@@ -100,10 +101,16 @@ class ModeratorFormContainer extends Component {
             this.setState({currentEmailId : null});
             this.setState({currentEmailIndex : 0});
         }else{
-            var newIndex = this.state.currentEmailIndex - 1;
-            this.setState({currentEmailIndex : newIndex});
+
+            if(this.state.currentEmailIndex === this.state.numEmails - 1){
+                var newIndex = this.state.currentEmailIndex - 1;
+                this.setState({currentEmailIndex : newIndex});
+            }
+    
             this.selectEmailNoList(this.state.currentEmailIndex);
         }
+
+        this.getPreviousEmail();
     }
 
     render(){
