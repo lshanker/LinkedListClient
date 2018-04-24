@@ -18,7 +18,27 @@ const INITIAL_STATE = {
   const byPropKey = (propertyName, value) => () => ({
     [propertyName]: value,
   });
+function myFunction() {
+    // Get the snackbar DIV
+    var x = document.getElementById("snackbar");
 
+    // Add the "show" class to DIV
+    x.className = "show";
+
+    // After 3 seconds, remove the show class from DIV
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+}
+
+function myFunction2() {
+    // Get the snackbar DIV
+    var x = document.getElementById("snackbar2");
+
+    // Add the "show" class to DIV
+    x.className = "show";
+
+    // After 3 seconds, remove the show class from DIV
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+}
 
 class EmailForm extends Component{
 
@@ -43,6 +63,7 @@ class EmailForm extends Component{
         console.log(subject + message);
         if(this.state.isMod){
             db.doStoreModEmail(subject, message, this.props.currentListId, this.props.email);
+            myFunction2();
         } else {
         db.doStoreEmail(subject, message, this.props.currentListId, this.props.email);
     
@@ -59,9 +80,9 @@ class EmailForm extends Component{
           .catch(function (error) {
             console.log(error);
           });
+          myFunction();
         }
     });     
-        
     }
 
     render(){
@@ -102,6 +123,8 @@ class EmailForm extends Component{
                     </div>
                 </form>
             </div>
+            <div id="snackbar2">your email is in moderation queue!</div>
+            <div id="snackbar">you sent an email!</div>
         </div>
         )
     }   
