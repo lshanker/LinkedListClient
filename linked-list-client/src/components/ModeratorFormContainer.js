@@ -45,6 +45,7 @@ class ModeratorFormContainer extends Component {
     selectEmail = (list, i) => {
         console.log('in select email with list');
         var counter = 0;
+
         for(var emailId in list){
             console.log(emailId);
             if(counter == i){
@@ -95,26 +96,33 @@ class ModeratorFormContainer extends Component {
         console.log('in remove email ' + this.state.currentEmailIndex);
         var list = this.state.emails;
         delete list[this.state.currentEmailId];
-        
-        var newNumEmails = this.state.numEmails - 1;
-        this.setState({numEmails : newNumEmails});
-
-        if(!!this.state.emails){
+    
+        console.log(list);
+        if(this.state.numEmails === 1){
             //No emails left in queue
+
+            console.log('null emails');
+
             this.setState({currentEmail : null});
             this.setState({currentEmailId : null});
             this.setState({currentEmailIndex : 0});
         }else{
-
-            if(this.state.currentEmailIndex === this.state.numEmails - 1 && !(this.state.numEmails === 2)){
+            console.log('not null emails')
+            console.log('cur email index: ' + this.state.currentEmailIndex);
+            console.log('num emails: ' + this.state.numEmails);
+            if(this.state.currentEmailIndex === this.state.numEmails){
+                console.log('in edge');
                 var newIndex = this.state.currentEmailIndex - 1;
                 this.setState({currentEmailIndex : newIndex});
             }
     
             this.selectEmailNoList(this.state.currentEmailIndex);
+            
+            this.getPreviousEmail();
+
         }
 
-        this.getPreviousEmail();
+        
     }
 
     render(){
