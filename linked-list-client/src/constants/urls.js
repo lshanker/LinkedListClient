@@ -1,3 +1,3 @@
 
-export const SERVER = "http://10.186.97.108:5000/";
+export const SERVER = "http://http://hareeshgali.asuscomm.com:80/";
 export const CLIENT = "http://localhost:3000/";
