@@ -61,28 +61,32 @@ class EmailForm extends Component{
             this.setState(() => ({ isMod : flag}))
         console.log("only" + this.state.isMod);
         console.log(subject + message);
+        
         if(this.state.isMod){
             db.doStoreModEmail(subject, message, this.props.currentListId, this.props.email);
             myFunction2();
         } else {
-        db.doStoreEmail(subject, message, this.props.currentListId, this.props.email);
+            db.doStoreEmail(subject, message, this.props.currentListId, this.props.email);
     
-        axios.get(urls.SERVER + "mail", {
-            params: {
-                "list": this.props.currentListId,
-                "message": message,
-                "subj": subject
+            axios.get(urls.SERVER + "mail", {
+                params: {
+                    "list": this.props.currentListId,
+                    "message": message,
+                    "subj": subject
+                }
+        
+            })
+            .then(function (response) {
+                console.log(response);
+                })
+                .catch(function (error) {
+                console.log(error);
+                });
+                myFunction();
             }
-        })
-        .then(function (response) {
-            console.log(response);
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
-          myFunction();
-        }
-    });     
+         });     
+
+         this.setState({...INITIAL_STATE})
     }
 
     render(){

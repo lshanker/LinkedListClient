@@ -87,6 +87,8 @@ export const doStoreEmail = (subject, message, listID, email) => {
 }
 
 
+
+
 export const doDeleteList = (listID) =>{
 
   console.log("helloworld");
@@ -107,6 +109,11 @@ export const doDeleteList = (listID) =>{
         db.ref(`lists/${listID}`).remove();
     });
 }
+
+export const doDeleteModEmail = (lid, emailId) => {
+  db.ref(`modemails/${lid}/${emailId}`).remove();
+}
+
 
 /******Functions for reading from the database******/
 
@@ -130,6 +137,11 @@ export const continuousGetList = (uid, func) =>
   });
 
   export const continuousGetEmails = (lid, func) =>
+  db.ref(`modemails/${lid}`).on('value', function(snapshot){
+    func(snapshot)
+  });
+
+  export const continuousGetModEmails = (lid, func) =>
   db.ref(`modemails/${lid}`).on('value', function(snapshot){
     func(snapshot)
   });
