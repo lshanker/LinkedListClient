@@ -2,7 +2,7 @@
   "name": "linked-list-client",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://github.com/lshanker/LinkedListClient",
+  "homepage": "http://linkedlist-64b5a.firebaseapp.com",
   "mdbreact": "git+https://github.com/mdbootstrap/React-Bootstrap-with-Material-Design.git",
   "dependencies": {
     "axios": "^0.18.0",

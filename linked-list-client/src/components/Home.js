@@ -24,18 +24,31 @@ class Home extends Component {
       sharePopupVisible: false,
       moderatorFormVisible: false,
       currentListId: null,
+      showModButton: false,
     }
   }
 
   setCurrentListId(currentListId) {
     this.setState({currentListId});
     this.setState({moderatorFormVisible : false})
+
+    //After we select a new list, we have to check if the user can view the mod list
+    db.onceGetIsMod(currentListId).then(snapshot => {
+      console.log(snapshot.val());
+      console.log(!!snapshot.val())
+      var flag = !!snapshot.val();
+      this.setState(() => ({ showModButton : flag}))
+    }); 
   }
+
+
 
   componentDidMount(){
     db.onceGetUsers().then(snapshot => 
       this.setState(() => ({ users: snapshot.val() }))
     );
+
+    
   }
 
   // toggleNewListForm = () => {
@@ -76,12 +89,15 @@ class Home extends Component {
                 : <EmailForm email = {this.props.userModel.email} currentListId = {this.state.currentListId}/> 
                 }
                 <button type="button" class="btn btn-outline-elegant mx-auto" onClick = {() => {this.toggleSharePopup()}}><i class="fa fa-share-square" aria-hidden="true"></i> Share List</button>
+                {
+                this.state.showModButton &&
                 <button type="button" class="btn btn-primary" onClick = {() => {this.toggleModeratorForm()}}>
                   {this.state.moderatorFormVisible ?
                     ("Mail @" + this.state.currentListId) :
                     "View Pending Emails"
                   }
                 </button>
+                }
                </div>
                : <h1><u><i>Select a list</i></u></h1>}              
             </div>

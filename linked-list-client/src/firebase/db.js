@@ -107,6 +107,9 @@ export const onceGetUsers = () =>
 export const onceGetLists = (uid) =>
   db.ref(`users/${uid}/lists`).once('value');
 
+export const onceGetIsMod = (lid) => 
+  db.ref(`lists/${lid}/isMod`).once('value');
+
 export const continuousGetList = (uid, func) =>
   db.ref(`users/${uid}/lists`).on('value', function(snapshot){
     func(snapshot)
