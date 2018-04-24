@@ -40,11 +40,7 @@ class NavbarFeatures extends React.Component {
                     { !this.state.isWideEnough && <NavbarToggler onClick = { this.onClick } />}
                     <Collapse isOpen = { this.state.collapse } navbar>
                         <NavbarNav left>
-                          <NavItem>
-                              <Link to={routes.ACCOUNT}>
-                                <span className = "nav-link">My Account</span>
-                              </Link>
-                          </NavItem>
+    
                           {/* dropdown component
                           <NavItem>
                               <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>

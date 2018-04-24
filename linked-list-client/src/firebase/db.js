@@ -75,6 +75,20 @@ export const doStoreEmail = (subject, message, listID, email) => {
   })
 }
 
+export const doStoreModEmail = (subject, message, listID, email) => {
+  const dateTime = Date.now();
+  const timestamp = Math.floor(dateTime / 1000);
+
+  db.ref(`modemails/${listID}/${timestamp}`).update({
+    subject,
+    message,
+    listID,
+    email,
+  })
+}
+
+
+
 
 export const doDeleteList = (listID) =>{
 
@@ -94,6 +108,10 @@ export const doDeleteList = (listID) =>{
   //db.ref(`modemails/${listID}`).remove();
   //db.ref(`emails/${listID}`).remove();
   //db.ref(`lists/${listID}`).remove();
+}
+
+export const doDeleteModEmail = (lid, emailId) => {
+  db.ref(`modemails/${lid}/${emailId}`).remove();
 }
 
 
@@ -117,6 +135,11 @@ export const continuousGetList = (uid, func) =>
 
   export const continuousGetEmails = (lid, func) =>
   db.ref(`emails/${lid}`).on('value', function(snapshot){
+    func(snapshot)
+  });
+
+  export const continuousGetModEmails = (lid, func) =>
+  db.ref(`modemails/${lid}`).on('value', function(snapshot){
     func(snapshot)
   });
 // Other Entity APIs ...

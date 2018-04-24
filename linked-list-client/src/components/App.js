@@ -84,10 +84,6 @@ class App extends Component {
           }
         />
         <Route
-          exact path={routes.ACCOUNT}
-          component={() => <Account />}
-        />
-        <Route
           exact path={routes.PASSWORD_FORGET}
           component={() => <PasswordForget />}
         />

@@ -13,6 +13,7 @@ class ModeratorFormContainer extends Component {
         this.state = {
           emails : null,
           currentEmail : null,
+          currentEmailId: null,
           currentEmailIndex: 0,
           numEmails: 0,
         }
@@ -48,6 +49,7 @@ class ModeratorFormContainer extends Component {
             if(counter == i){
                 console.log('here1');
                 this.setState({currentEmail : list[emailId]})
+                this.setState({currentEmailId : emailId})
             }
             counter++;
         }
@@ -64,7 +66,7 @@ class ModeratorFormContainer extends Component {
             currentEmail: null,
         })
 
-        db.continuousGetEmails(this.props.listId, (snapshot) => {
+        db.continuousGetModEmails(this.props.listId, (snapshot) => {
             console.log(snapshot.val());
             this.setState({emails : snapshot.val()});
             console.log("emails: " + this.state.emails);
@@ -88,6 +90,22 @@ class ModeratorFormContainer extends Component {
         this.setState({currentEmailIndex : this.state.currentEmailIndex - 1});
     }
 
+    removeCurrentEmail = () => {
+        console.log('in remove email ' + this.state.currentEmailIndex);
+        var list = this.state.emails;
+        delete list[this.state.currentEmailId];
+        if(!!this.state.emails){
+            //No emails left in queue
+            this.setState({currentEmail : null});
+            this.setState({currentEmailId : null});
+            this.setState({currentEmailIndex : 0});
+        }else{
+            var newIndex = this.state.currentEmailIndex - 1;
+            this.setState({currentEmailIndex : newIndex});
+            this.selectEmailNoList(this.state.currentEmailIndex);
+        }
+    }
+
     render(){
 
         return(
@@ -96,7 +114,11 @@ class ModeratorFormContainer extends Component {
                     <button className="btn #4a148c red darken-4">Delete Current List</button>
                 </form>
 
-                <ModeratorForm  email = {this.state.currentEmail}/>
+                <ModeratorForm  
+                    listId = {this.props.listId} 
+                    email = {this.state.currentEmail} 
+                    emailId = {this.state.currentEmailId}
+                    removeEmail = {this.removeCurrentEmail.bind(this)}/>
                 <button 
                     className = "btn btn-outline-primary"
                     disabled = {this.state.currentEmailIndex === 0 || this.state.numEmails == 0}

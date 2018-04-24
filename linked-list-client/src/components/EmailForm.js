@@ -36,7 +36,11 @@ class EmailForm extends Component{
 
         
         console.log(subject + message);
-        db.doStoreEmail(subject, message, this.props.currentListId, this.props.email);
+        if(this.props.isMod){
+            db.doStoreModEmail(subject, message, this.props.currentListId, this.props.email);
+        }else{
+            db.doStoreModEmail(subject, message, this.props.currentListId, this.props.email);
+        }
     
         axios.get(urls.SERVER + "mail", {
             params: {

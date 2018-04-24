@@ -37,7 +37,6 @@ const NavigationAuth = () =>
       </a>
     </li>
     <li className="nav-item active"><Link to={routes.HOME}>Home</Link></li>
-    <li className="nav-item active"><Link to={routes.ACCOUNT}>Account</Link></li>
     <li className="nav-item active"><SignOutButton /></li>
   </ul>
 
