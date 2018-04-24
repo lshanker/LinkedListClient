@@ -40,10 +40,10 @@ export const doCreateList = (listID, name, uid, email, isMod) =>
     name,
     isMod,
   }).then(()=>{
-    doAddListMember(listID, uid, email,);
+    doAddListMember(listID, uid, email,isMod);
   });
 
-export const doAddListMember = (listID, uid, email) => {
+export const doAddListMember = (listID, uid, email, isMod) => {
   db.ref(`lists/${listID}/members/${uid}`).set({
     email,
     isMod
