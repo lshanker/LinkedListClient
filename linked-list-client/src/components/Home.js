@@ -35,7 +35,7 @@ class Home extends Component {
     event.preventDefault();
     console.log(this.state.currentListId);
     db.doDeleteList(this.state.currentListId);
-
+    this.setState({currentListId : null})
 }
 
   setCurrentListId(currentListId) {
