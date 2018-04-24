@@ -17,6 +17,7 @@ const byPropKey = (propertyName, value) => () => ({
 
 const INITIAL_STATE = {
     listName: '',
+    isMod: false,
     listID: '', /*Currently called list tag in the form*/
     error: null,
   };
@@ -34,12 +35,13 @@ class NewListForm extends Component {
 
         const {
             listName,
+            isMod,
             listID,
         } = this.state;
 
         console.log(this.props.userModel.uid);
 
-        db.doCreateList(listID, listName, this.props.userModel.uid, this.props.userModel.email)
+        db.doCreateList(listID, listName, this.props.userModel.uid, this.props.userModel.email, isMod)
             .then(() => {
                 console.log("Created list " + listName);
                 this.setState({...INITIAL_STATE});
@@ -51,6 +53,11 @@ class NewListForm extends Component {
             });
 
     }
+
+    handleCheckClick = (event) => {
+        console.log(event.target.value);
+        this.setState(byPropKey('isMod', event.target.value));
+    }
     
     render(){
         
@@ -58,6 +65,7 @@ class NewListForm extends Component {
         const {
             listName,
             listID,
+            isMod,
             error,
         } = this.state;
 
@@ -85,7 +93,10 @@ class NewListForm extends Component {
                             />
                         </div>
                         <div className = "md-form">
-                        <input type="checkbox" id="checkbox1" />Gimme your money
+                        <input type="checkbox"
+                         value = {isMod}
+                         onChange = {event => this.handleCheckClick(event)}
+                         id="checkbox1" />Gimme your money
                         </div>
                         { error && <p id="errorMessage">{error.message}</p> }
                     </form>
