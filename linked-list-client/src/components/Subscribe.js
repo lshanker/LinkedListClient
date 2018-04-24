@@ -17,7 +17,16 @@ const INITIAL_STATE = {
     listId: null,
   };
 
+function myFunction() {
+    // Get the snackbar DIV
+    var x = document.getElementById("snackbar");
 
+    // Add the "show" class to DIV
+    x.className = "show";
+
+    // After 3 seconds, remove the show class from DIV
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+}
 class Subscribe extends Component {
     
     constructor(props){
@@ -86,6 +95,7 @@ class Subscribe extends Component {
               </form>
             </div>
           </div>
+          <div id="snackbar">you are subscribed!yay</div>
         </div>
         )
     }
