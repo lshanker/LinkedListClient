@@ -61,6 +61,7 @@ class NewListForm extends Component {
     
     render(){
         
+        const isInvalid = this.state.listName === "" || this.state.listID === "";
     
         const {
             listName,
@@ -96,14 +97,14 @@ class NewListForm extends Component {
                         <input type="checkbox"
                          value = {isMod}
                          onChange = {event => this.handleCheckClick(event)}
-                         id="checkbox1" />Gimme your money
+                         id="checkbox1" />Moderated List
                         </div>
                         { error && <p id="errorMessage">{error.message}</p> }
                     </form>
                 </ModalBody>
                 <ModalFooter>
                     <Button color="secondary" onClick={() => this.props.toggle()}>Close</Button>{' '}
-                    <Button color="primary" type="submit" form="newListForm">Save changes</Button>
+                    <Button disabled = {isInvalid} color="primary" type="submit" form="newListForm">Save changes</Button>
                 </ModalFooter>
             </Modal>
         
