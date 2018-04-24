@@ -36,19 +36,22 @@ class ModeratorForm extends Component{
             console.log(response);
             db.doDeleteModEmail(this.props.listId, this.props.emailId);
             db.doStoreEmail(this.props.email.subject, this.props.email.message, this.props.listId, this.props.email.email);
+            this.props.removeEmail();
         })
           .catch(function (error) {
             console.log(error);
+            
         });
 
-        this.forceUpdate();
-
+        db.doDeleteModEmail(this.props.listId, this.props.emailId);
+        db.doStoreEmail(this.props.email.subject, this.props.email.message, this.props.listId, this.props.email.email);
+        this.props.removeEmail();
+        
     }
 
     handleRejectClick = () => {
         db.doDeleteModEmail(this.props.listId, this.props.emailId);
         this.props.removeEmail();
-        //this.forceUpdate();
     }
     
     render(){
