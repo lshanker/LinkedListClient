@@ -21,8 +21,8 @@ class ModeratorFormContainer extends Component {
   
   onSubmit = (event) => {
         event.preventDefault();
-        console.log(this.props.currentListId);
-        db.doDeleteList(this.props.currentListId);
+        console.log(this.props.listId);
+        db.doDeleteList(this.props.listId);
 
     }
 

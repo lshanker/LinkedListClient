@@ -82,20 +82,20 @@ export const doDeleteList = (listID) =>{
   console.log(listID);
 
   const usersInList = db.ref(`lists/${listID}/members`);
-  console.log(usersInList);
-  usersInList.once("value").then(function(snapshot) {
-    snapshot.forEach(function(childSnapshot) {
-      var user = childSnapshot.key;
-      db.ref(`users/${user}/lists/${listID}`).remove();
-      console.log("hello?")
+
+  usersInList.on("value", function(snapshot) {
+      console.log(snapshot.key);
+      console.log(snapshot.val());
+      snapshot.forEach(function(childSnapshot) {
+        var user = childSnapshot.key;
+        db.ref(`users/${user}/lists/${listID}`).remove();
+      })
+        
+        db.ref(`modemails/${listID}`).remove();
+        db.ref(`emails/${listID}`).remove();
+        db.ref(`lists/${listID}`).remove();
     });
-  });
-
-  //db.ref(`modemails/${listID}`).remove();
-  //db.ref(`emails/${listID}`).remove();
-  //db.ref(`lists/${listID}`).remove();
 }
-
 
 /******Functions for reading from the database******/
 
