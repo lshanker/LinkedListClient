@@ -26,6 +26,8 @@ class Home extends Component {
       moderatorFormVisible: false,
       currentListId: null,
       isOwner: false,
+      showModButton: false,
+      showUserModButton: false
     }
   }
 
@@ -40,14 +42,28 @@ class Home extends Component {
     this.setState({currentListId});
     this.setState({moderatorFormVisible : false})
     this.setOwner(currentListId);
-
+    //After we select a new list, we have to check if the user can view the mod list
+    db.onceGetIsMod(currentListId).then(snapshot => {
+      console.log(snapshot.val());
+      console.log(!!snapshot.val())
+      var flag = !!snapshot.val();
+      this.setState(() => ({ showModButton : flag}))
+    }); 
+    db.onceGetIsUserMod(currentListId, this.props.userModel.uid).then(snapshot => {
+      console.log(snapshot.val());
+      console.log(!!snapshot.val())
+      var flag = !!snapshot.val();
+      this.setState(() => ({ showUserModButton : flag}))
+    }); 
   }
 
-  setOwner(currentListId) {
+setOwner(currentListId) {
     isOwnerList(currentListId, this.props.userModel.uid, (flag) => {
       this.setState({isOwner: flag});
     });
   }
+
+
 
   componentDidMount(){
     db.onceGetUsers().then(snapshot => 
@@ -95,7 +111,7 @@ class Home extends Component {
               <div>
                 {this.state.moderatorFormVisible ?
                 <ModeratorFormContainer listId = {this.state.currentListId}/>
-                : <EmailForm email = {this.props.userModel.email} currentListId = {this.state.currentListId}/> 
+                : <EmailForm isMod = {this.state.isMod} email = {this.props.userModel.email} currentListId = {this.state.currentListId}/> 
                 }
                 {this.state.isOwner ?
                 <form onSubmit={this.onSubmit}>
@@ -103,14 +119,19 @@ class Home extends Component {
                 </form> 
                 : <p></p>
                 }
-                    
-                <button type="button" className="btn btn-outline-elegant mx-auto" onClick = {() => {this.toggleSharePopup()}}><i class="fa fa-share-square" aria-hidden="true"></i> Share List</button>
-                <button type="button" className="btn btn-primary" onClick = {() => {this.toggleModeratorForm()}}>
+                   
+                <button type="button" class="btn btn-outline-elegant mx-auto" onClick = {() => {this.toggleSharePopup()}}><i class="fa fa-share-square" aria-hidden="true"></i> Share List</button>
+                {
+                this.state.showUserModButton &&
+                this.state.showModButton &&
+                <button type="button" class="btn btn-primary" onClick = {() => {this.toggleModeratorForm()}}>
+
                   {this.state.moderatorFormVisible ?
                     ("Mail @" + this.state.currentListId) :
                     "View Pending Emails"
                   }
                 </button>
+                }
                </div>
                : <h1><u><i>Select a list</i></u></h1>}              
             </div>

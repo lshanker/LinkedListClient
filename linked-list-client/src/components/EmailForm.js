@@ -11,13 +11,34 @@ import './EmailForm.css'
 const INITIAL_STATE = {
     subject: '',
     message: '',
+    isMod: false,
     error: null,
   };
 
   const byPropKey = (propertyName, value) => () => ({
     [propertyName]: value,
   });
+function myFunction() {
+    // Get the snackbar DIV
+    var x = document.getElementById("snackbar");
 
+    // Add the "show" class to DIV
+    x.className = "show";
+
+    // After 3 seconds, remove the show class from DIV
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+}
+
+function myFunction2() {
+    // Get the snackbar DIV
+    var x = document.getElementById("snackbar2");
+
+    // Add the "show" class to DIV
+    x.className = "show";
+
+    // After 3 seconds, remove the show class from DIV
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+}
 
 class EmailForm extends Component{
 
@@ -32,25 +53,40 @@ class EmailForm extends Component{
         const {
             subject,
             message,
+            isMod
         } = this.state;
 
-        
+        db.onceGetIsMod(this.props.currentListId).then(snapshot => {
+            var flag = !!snapshot.val();
+            this.setState(() => ({ isMod : flag}))
+        console.log("only" + this.state.isMod);
         console.log(subject + message);
-        db.doStoreEmail(subject, message, this.props.currentListId, this.props.email);
+        
+        if(this.state.isMod){
+            db.doStoreModEmail(subject, message, this.props.currentListId, this.props.email);
+            myFunction2();
+        } else {
+            db.doStoreEmail(subject, message, this.props.currentListId, this.props.email);
     
-        axios.get(urls.SERVER + "mail", {
-            params: {
-                "list": this.props.currentListId,
-                "message": message,
-                "subj": subject
+            axios.get(urls.SERVER + "mail", {
+                params: {
+                    "list": this.props.currentListId,
+                    "message": message,
+                    "subj": subject
+                }
+        
+            })
+            .then(function (response) {
+                console.log(response);
+                })
+                .catch(function (error) {
+                console.log(error);
+                });
+                myFunction();
             }
-        })
-        .then(function (response) {
-            console.log(response);
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
+         });     
+
+         this.setState({...INITIAL_STATE})
     }
 
     render(){
@@ -61,6 +97,8 @@ class EmailForm extends Component{
             // error, 
             // What to do with this?
           } = this.state;
+
+        const isInvalid = this.state.subject === "" || this.state.message === "";
 
         return (
         <div id="emailForm-root" className="card mx-auto">
@@ -85,12 +123,16 @@ class EmailForm extends Component{
                         />
                     
                         <div className="text-center">
+
                             <button className="btn #4a148c purple darken-4"><i className="fa fa-send" aria-hidden="true"></i> Send</button>
                             <button className="btn #ff5722 deep-orange"><i className="fa fa-trash-o" aria-hidden="true"></i> Discard</button>
+
                         </div>
                     </div>
                 </form>
             </div>
+            <div id="snackbar2">your email is in moderation queue!</div>
+            <div id="snackbar">you sent an email!</div>
         </div>
         )
     }   

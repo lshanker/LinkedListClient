@@ -38,7 +38,6 @@ class SharePopup extends Component {
                     </CopyToClipboard>
                     </div>
                     <br/>
-                    <p>Or they can enter this code: {this.props.currentListId} </p>
                 </ModalBody>
                 <ModalFooter>
                     <Button color="secondary" onClick={() => this.props.toggle()}>Close</Button>{' '}

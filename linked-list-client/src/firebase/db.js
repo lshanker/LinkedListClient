@@ -64,6 +64,17 @@ export const doAddListMember = (listID, uid, email, isMod, isOwner) => {
   });
 
 }
+export const doStoreModEmail = (subject, message, listID, email) => {
+  const dateTime = Date.now();
+  const timestamp = Math.floor(dateTime / 1000);
+
+  db.ref(`modemails/${listID}/${timestamp}`).update({
+    subject,
+    message,
+    listID,
+    email,
+  })
+}
 
 export const doStoreEmail = (subject, message, listID, email) => {
   const dateTime = Date.now();
@@ -76,6 +87,8 @@ export const doStoreEmail = (subject, message, listID, email) => {
     email,
   })
 }
+
+
 
 
 export const doDeleteList = (listID) =>{
@@ -99,6 +112,11 @@ export const doDeleteList = (listID) =>{
     });
 }
 
+export const doDeleteModEmail = (lid, emailId) => {
+  db.ref(`modemails/${lid}/${emailId}`).remove();
+}
+
+
 /******Functions for reading from the database******/
 
 //returns all users
@@ -109,13 +127,24 @@ export const onceGetUsers = () =>
 export const onceGetLists = (uid) =>
   db.ref(`users/${uid}/lists`).once('value');
 
+export const onceGetIsMod = (lid) => 
+  db.ref(`lists/${lid}/isMod`).once('value');
+
+export const onceGetIsUserMod = (lid, uid) => 
+  db.ref(`lists/${lid}/members/${uid}/isMod`).once('value');
+
 export const continuousGetList = (uid, func) =>
   db.ref(`users/${uid}/lists`).on('value', function(snapshot){
     func(snapshot)
   });
 
   export const continuousGetEmails = (lid, func) =>
-  db.ref(`emails/${lid}`).on('value', function(snapshot){
+  db.ref(`modemails/${lid}`).on('value', function(snapshot){
+    func(snapshot)
+  });
+
+  export const continuousGetModEmails = (lid, func) =>
+  db.ref(`modemails/${lid}`).on('value', function(snapshot){
     func(snapshot)
   });
 
