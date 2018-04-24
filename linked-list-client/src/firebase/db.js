@@ -88,9 +88,9 @@ export const doDeleteList = (listID) =>{
     });
   });
 
-  //db.ref(`modemails/${listID}`).remove();
-  //db.ref(`emails/${listID}`).remove();
-  //db.ref(`lists/${listID}`).remove();
+  db.ref(`modemails/${listID}`).remove();
+  db.ref(`emails/${listID}`).remove();
+  db.ref(`lists/${listID}`).remove();
 }
 
 
