@@ -55,8 +55,8 @@ class NewListForm extends Component {
     }
 
     handleCheckClick = (event) => {
-        console.log(event.target.value);
-        this.setState(byPropKey('isMod', event.target.value));
+        console.log(event.target.checked);
+        this.setState(byPropKey('isMod', event.target.checked));
     }
     
     render(){
