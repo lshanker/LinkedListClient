@@ -50,7 +50,7 @@ class Subscribe extends Component {
 
     onSubmit = (event) => {
       event.preventDefault();
-
+      this.setState({email : ""})
       db.subscribe(this.state.listId, this.state.email, this.subscribeCallback);
  
     }
@@ -63,7 +63,6 @@ class Subscribe extends Component {
 
         const{
             email,
-
             listId,
         } = this.state;
 
