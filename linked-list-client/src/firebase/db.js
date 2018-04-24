@@ -40,10 +40,10 @@ export const doCreateList = (listID, name, uid, email, isMod) =>
     name,
     isMod,
   }).then(()=>{
-    doAddListMember(listID, uid, email,);
+    doAddListMember(listID, uid, email,isMod);
   });
 
-export const doAddListMember = (listID, uid, email) => {
+export const doAddListMember = (listID, uid, email, isMod) => {
   db.ref(`lists/${listID}/members/${uid}`).set({
     email,
     isMod
@@ -82,20 +82,20 @@ export const doDeleteList = (listID) =>{
   console.log(listID);
 
   const usersInList = db.ref(`lists/${listID}/members`);
-  console.log(usersInList);
-  usersInList.once("value").then(function(snapshot) {
-    snapshot.forEach(function(childSnapshot) {
-      var user = childSnapshot.key;
-      db.ref(`users/${user}/lists/${listID}`).remove();
-      console.log("hello?")
+
+  usersInList.on("value", function(snapshot) {
+      console.log(snapshot.key);
+      console.log(snapshot.val());
+      snapshot.forEach(function(childSnapshot) {
+        var user = childSnapshot.key;
+        db.ref(`users/${user}/lists/${listID}`).remove();
+      })
+        
+        db.ref(`modemails/${listID}`).remove();
+        db.ref(`emails/${listID}`).remove();
+        db.ref(`lists/${listID}`).remove();
     });
-  });
-
-  db.ref(`modemails/${listID}`).remove();
-  db.ref(`emails/${listID}`).remove();
-  db.ref(`lists/${listID}`).remove();
 }
-
 
 /******Functions for reading from the database******/
 
