@@ -35,18 +35,20 @@ export const doCreateUser = (id, username, email, isMod) =>
       console.log('here')
   });
 
-export const doCreateList = (listID, name, uid, email, isMod) => 
+export const doCreateList = (listID, name, uid, email, isMod, isOwner) => 
   db.ref(`lists/${listID}`).set({
     name,
     isMod,
+    isOwner,
   }).then(()=>{
-    doAddListMember(listID, uid, email,isMod);
+    doAddListMember(listID, uid, email,isMod, isOwner);
   });
 
-export const doAddListMember = (listID, uid, email, isMod) => {
+export const doAddListMember = (listID, uid, email, isMod, isOwner) => {
   db.ref(`lists/${listID}/members/${uid}`).set({
     email,
-    isMod
+    isMod,
+    isOwner,
     //[uid]: email,
   });
 
@@ -116,4 +118,15 @@ export const continuousGetList = (uid, func) =>
   db.ref(`emails/${lid}`).on('value', function(snapshot){
     func(snapshot)
   });
+
+  export const isOwnerList = (listId, uid) => {
+    db.ref(`lists/${listId}/members/${uid}`)
+
+    var ref = db.ref(`lists/${listId}/members`);
+    ref.once("value")
+      .then(function(snapshot) {
+        var owner = snapshot.child(`${uid}/isOwner`).val();
+        return owner;
+      });
+  }
 // Other Entity APIs ...
