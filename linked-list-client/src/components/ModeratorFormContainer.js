@@ -95,6 +95,10 @@ class ModeratorFormContainer extends Component {
         console.log('in remove email ' + this.state.currentEmailIndex);
         var list = this.state.emails;
         delete list[this.state.currentEmailId];
+        
+        var newNumEmails = this.state.numEmails - 1;
+        this.setState({numEmails : newNumEmails});
+
         if(!!this.state.emails){
             //No emails left in queue
             this.setState({currentEmail : null});
@@ -102,7 +106,7 @@ class ModeratorFormContainer extends Component {
             this.setState({currentEmailIndex : 0});
         }else{
 
-            if(this.state.currentEmailIndex === this.state.numEmails - 1){
+            if(this.state.currentEmailIndex === this.state.numEmails - 1 && !(this.state.numEmails === 2)){
                 var newIndex = this.state.currentEmailIndex - 1;
                 this.setState({currentEmailIndex : newIndex});
             }
