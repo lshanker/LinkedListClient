@@ -31,7 +31,6 @@ export const doCreateUser = (id, username, email, isMod) =>
   db.ref(`users/${id}`).set({
     username,
     email,
-    isMod,
   }).then(() => {
       console.log('here')
   });
@@ -41,12 +40,14 @@ export const doCreateList = (listID, name, uid, email, isMod) =>
     name,
     isMod,
   }).then(()=>{
-    doAddListMember(listID, uid, email, isMod);
+    doAddListMember(listID, uid, email,);
   });
 
 export const doAddListMember = (listID, uid, email) => {
-  db.ref(`lists/${listID}/members`).set({
-    [uid]: email,
+  db.ref(`lists/${listID}/members/${uid}`).set({
+    email,
+    isMod
+    //[uid]: email,
   });
 
 
