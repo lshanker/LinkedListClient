@@ -119,14 +119,13 @@ export const continuousGetList = (uid, func) =>
     func(snapshot)
   });
 
-  export const isOwnerList = (listId, uid) => {
+  export const isOwnerList = (listId, uid, callback) => {
     db.ref(`lists/${listId}/members/${uid}`)
-
+    var owner;
     var ref = db.ref(`lists/${listId}/members`);
     ref.once("value")
       .then(function(snapshot) {
-        var owner = snapshot.child(`${uid}/isOwner`).val();
-        return owner;
+        callback(snapshot.child(`${uid}/isOwner`).val());
       });
   }
 // Other Entity APIs ...
