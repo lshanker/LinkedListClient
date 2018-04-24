@@ -11,7 +11,6 @@ import { auth, db } from '../firebase';
 
 
 
-
 class ModeratorForm extends Component{
 
     constructor(props){
@@ -20,6 +19,7 @@ class ModeratorForm extends Component{
 
     onSubmit= (event) => {
         event.preventDefault();
+
     }
 
     componentDidMount(){
@@ -65,7 +65,6 @@ class ModeratorForm extends Component{
     }   
 
 }
-
 ModeratorForm.defaultProps = {
     email: {
         subject: 'default subj',

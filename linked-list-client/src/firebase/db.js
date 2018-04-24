@@ -15,7 +15,7 @@ function httpGet(queryString, callback)
     xmlHttp.send(null);
 }
 
-function subscribe(list, email, callback){
+export const subscribe = (list, email, callback) => {
   var retVal = httpGet("sub?list=" + list + "&email=" + email, callback);
   return retVal;
 }
@@ -73,6 +73,27 @@ export const doStoreEmail = (subject, message, listID, email) => {
     listID,
     email,
   })
+}
+
+
+export const doDeleteList = (listID) =>{
+
+  console.log("helloworld");
+  console.log(listID);
+
+  const usersInList = db.ref(`lists/${listID}/members`);
+  console.log(usersInList);
+  usersInList.once("value").then(function(snapshot) {
+    snapshot.forEach(function(childSnapshot) {
+      var user = childSnapshot.key;
+      db.ref(`users/${user}/lists/${listID}`).remove();
+      console.log("hello?")
+    });
+  });
+
+  //db.ref(`modemails/${listID}`).remove();
+  //db.ref(`emails/${listID}`).remove();
+  //db.ref(`lists/${listID}`).remove();
 }
 
 

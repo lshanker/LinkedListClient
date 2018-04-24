@@ -3,9 +3,14 @@ import { db } from '../firebase';
 
 import { withRouter } from 'react-router-dom';
 
+
 import './Subscribe.css'
 
-const queryString = require('query-string');
+//import queryString from 'query-string';
+
+//const queryString = require('query-string');
+
+var URLSearchParams = require('url-search-params');
 
 const INITIAL_STATE = {
     email: '',
@@ -20,28 +25,36 @@ class Subscribe extends Component {
 
         this.state = { ...INITIAL_STATE };
     }
-
-
     componentDidMount(){
-      const parsedQuery = queryString.parse(this.props.location.search);
-      const listId = parsedQuery.listId;
+      var url = window.location.href;
+      var query = url.substring(url.indexOf("?") + 1, url.length);
+      console.log(query);
+      var searchParams = new URLSearchParams(query);
+      
+      const listId = searchParams.get("listId");
+    
+      console.log(searchParams)
+      console.log(window.location.href);
+      console.log(listId)
       this.setState({listId});
     }
 
     onSubmit = (event) => {
       event.preventDefault();
 
-      db.subscribe(this.state.listId, this.state.email, () => {
-        console.log('Successfully subscribed');
-      });
+      db.subscribe(this.state.listId, this.state.email, this.subscribeCallback);
  
     }
-
     
+    subscribeCallback = () => {
+      console.log("subscribed");
+    }
+
     render(){
 
         const{
             email,
+
             listId,
         } = this.state;
 
