@@ -125,7 +125,6 @@ class EmailForm extends Component{
                         <div className="text-center">
 
                             <button disabled = {isInvalid} className="btn #4a148c purple darken-4"><i className="fa fa-send" aria-hidden="true"></i> Send</button>
-                            <button className="btn #ff5722 deep-orange"><i className="fa fa-trash-o" aria-hidden="true"></i> Discard</button>
 
                         </div>
                     </div>
