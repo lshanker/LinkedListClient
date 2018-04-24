@@ -12,6 +12,7 @@ import ModeratorForm from './ModeratorForm';
 import ModeratorFormContainer from './ModeratorFormContainer'
 
 import './Home.css';
+import { isOwnerList } from '../firebase/db';
 
 class Home extends Component {
 
@@ -24,15 +25,23 @@ class Home extends Component {
       sharePopupVisible: false,
       moderatorFormVisible: false,
       currentListId: null,
+      isOwner: false,
       showModButton: false,
       showUserModButton: false
     }
   }
 
+  onSubmit = (event) => {
+    event.preventDefault();
+    console.log(this.state.currentListId);
+    db.doDeleteList(this.state.currentListId);
+
+}
+
   setCurrentListId(currentListId) {
     this.setState({currentListId});
     this.setState({moderatorFormVisible : false})
-
+    this.setOwner(currentListId);
     //After we select a new list, we have to check if the user can view the mod list
     db.onceGetIsMod(currentListId).then(snapshot => {
       console.log(snapshot.val());
@@ -48,6 +57,12 @@ class Home extends Component {
     }); 
   }
 
+setOwner(currentListId) {
+    isOwnerList(currentListId, this.props.userModel.uid, (flag) => {
+      this.setState({isOwner: flag});
+    });
+  }
+
 
 
   componentDidMount(){
@@ -57,6 +72,10 @@ class Home extends Component {
 
     
   }
+
+  // componentWillMount(){
+  //   this.setOwner(this.state.currentListId)
+  // }
 
   // toggleNewListForm = () => {
   //   this.setState({newListFormVisible: !this.state.newListFormVisible})
@@ -83,7 +102,6 @@ class Home extends Component {
             </div>
             <div className="col-1"></div>
             <div className="col-6">
-
             {/*this.state.newListFormVisible && <NewListForm userModel = {this.props.userModel} isOpen = {this.state.newListFormVisible} toggle =  {this.toggleNewListForm.bind(this)}/>*/}
             {this.state.sharePopupVisible && <SharePopup currentListId = {this.state.currentListId} isOpen = {this.state.sharePopupVisible} toggle =  {this.toggleSharePopup.bind(this)}/>}
 
@@ -95,11 +113,19 @@ class Home extends Component {
                 <ModeratorFormContainer listId = {this.state.currentListId}/>
                 : <EmailForm isMod = {this.state.isMod} email = {this.props.userModel.email} currentListId = {this.state.currentListId}/> 
                 }
+                {this.state.isOwner ?
+                <form onSubmit={this.onSubmit}>
+                  <button className="btn #4a148c red darken-4">Delete Current List</button>
+                </form> 
+                : <p></p>
+                }
+                   
                 <button type="button" class="btn btn-outline-elegant mx-auto" onClick = {() => {this.toggleSharePopup()}}><i class="fa fa-share-square" aria-hidden="true"></i> Share List</button>
                 {
                 this.state.showUserModButton &&
                 this.state.showModButton &&
                 <button type="button" class="btn btn-primary" onClick = {() => {this.toggleModeratorForm()}}>
+
                   {this.state.moderatorFormVisible ?
                     ("Mail @" + this.state.currentListId) :
                     "View Pending Emails"

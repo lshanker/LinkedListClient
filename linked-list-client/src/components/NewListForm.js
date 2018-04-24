@@ -18,6 +18,7 @@ const byPropKey = (propertyName, value) => () => ({
 const INITIAL_STATE = {
     listName: '',
     isMod: false,
+    isOwner: false,
     listID: '', /*Currently called list tag in the form*/
     error: null,
   };
@@ -36,12 +37,12 @@ class NewListForm extends Component {
         const {
             listName,
             isMod,
+            isOwner,
             listID,
         } = this.state;
 
         console.log(this.props.userModel.uid);
-
-        db.doCreateList(listID, listName, this.props.userModel.uid, this.props.userModel.email, isMod)
+        db.doCreateList(listID, listName, this.props.userModel.uid, this.props.userModel.email, isMod, true)
             .then(() => {
                 console.log("Created list " + listName);
                 this.setState({...INITIAL_STATE});
@@ -67,6 +68,7 @@ class NewListForm extends Component {
             listName,
             listID,
             isMod,
+            isOwner,
             error,
         } = this.state;
 
