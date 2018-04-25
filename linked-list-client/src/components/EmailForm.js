@@ -101,9 +101,6 @@ class EmailForm extends Component{
         const isInvalid = this.state.subject === "" || this.state.message === "";
 
         return (
-	<head>
-	<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />		
-	</head>
         <div id="emailForm-root" className="card mx-auto">
             <div className="cardBody">
                 <form onSubmit={this.onSubmit}>
